@@ -2,3 +2,7 @@ pytest
 pytest-mock
 sphinx
 sphinx-rtd-theme
+SpeechRecognition==3.8.1
+PyAudio==0.2.11
+Wave==0.0.2
+pynput
