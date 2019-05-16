@@ -1,6 +1,6 @@
 """
 talk_button.py
----------
+--------------
 Module responsible for push-to-talk feature.
 
 Usage example:
@@ -20,9 +20,6 @@ import logger
 class TalkButton(HotKey):
 
     def start(self):
-        """5
-        Starts recording on the separate thread.
-        """
         with Listener(
                 on_press=self.on_press,
                 on_release=self.on_release) as listener:
