@@ -18,13 +18,14 @@ class Settings(UserDict):
         try:
             with open(config_path) as f:
                 self.data = json.load(f)
-            logger.info("Configuration loaded successfully from the file.")
         except FileNotFoundError:
             logger.warning("Configuration file not found.")
             self._load_default_configuration()
         except IOError:
             logger.exception("Opening configuration failed")
             self._load_default_configuration()
+        else:
+            logger.info("Configuration loaded successfully from the file.")
         logger.debug("Loaded config: {}".format(self.data))
 
     def _load_default_configuration(self):

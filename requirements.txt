@@ -2,3 +2,4 @@ pytest
 pytest-mock
 sphinx
 sphinx-rtd-theme
+PyQt5
