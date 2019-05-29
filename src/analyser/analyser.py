@@ -2,10 +2,6 @@ from conf import settings
 from enum import Enum
 from copy import deepcopy
 
-class State(Enum):
-    NORMAL = 0
-    EXACT = 1
-
 STATE = {
     'NORMAL' : 0,
     'EXACT' : 1
@@ -28,6 +24,7 @@ class Analyser:
         magicWords = settings['magicWords']
         if word in magicWords:
             self.state = magicWords[word]
+            break
         else:
             self.finalList.append(word)
 
