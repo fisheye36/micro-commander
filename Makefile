@@ -1,5 +1,5 @@
 VENV_NAME?=venv
-SYSTEM_PYTHON=/usr/bin/env python3.5
+SYSTEM_PYTHON=/usr/bin/env python3
 PYTHON=${VENV_NAME}/bin/python3
 
 .DEFAULT: help
