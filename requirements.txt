@@ -2,5 +2,8 @@ pytest
 pytest-mock
 sphinx
 sphinx-rtd-theme
+pynput
 PyQt5
 python-xlib
+SpeechRecognition
+PyAudio
