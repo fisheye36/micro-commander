@@ -5,6 +5,20 @@ from pynput.keyboard import Controller as KeyboardController
 from key_input import diacritic_mappings
 
 
+class KeyCombination:
+
+    def __init__(self, key_1, key_2):
+        """Combination of two keys.
+
+        :param key_1: First key. This key should be not "invasive". e.g. Ctrl, Alt, etc..
+        It is important to avoid the situation where before we press the function key,
+        a letter is printed.
+        :param key_2: Second key. Each key is available here.
+        """
+        self.key_1 = key_1
+        self.key_2 = key_2
+
+
 class FakeKeyboard(KeyboardController):
     """A fake keyboard device that can simulate user pressing keys on a real keyboard."""
 
@@ -21,6 +35,15 @@ class FakeKeyboard(KeyboardController):
         self.press(key)
         self._wait(press_duration)
         self.release(key)
+
+    def simulate_combination(self, key_combination):
+        """Simulate combination of two keys. For example Ctrl+s (to save) or similar.
+
+        :param key_combination: an instance of KeyCombination.
+        """
+        with self.pressed(key_combination.key_1):
+            self.press(key_combination.key_2)
+            self.release(key_combination.key_1)
 
     def _wait(self, duration):
         if duration:
