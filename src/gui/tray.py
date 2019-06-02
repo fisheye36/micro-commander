@@ -34,7 +34,7 @@ class TrayWindow(QDialog):
 
         self.trayIcon.activated.connect(self.iconActivated)
 
-        icon = QIcon(getResource("speech.png"))
+        icon = QIcon(getResource("logomccpoy.png"))
         self.trayIcon.setIcon(icon)
         self.setWindowIcon(icon)
 
@@ -44,7 +44,7 @@ class TrayWindow(QDialog):
         self.showNotification("TITLE", "BODY")
 
     def showSettings(self):
-        self.settingsWindow.show()
+        self.settingsWindow.initUI()
 
     def showNotification(self, title, body):
         icon = QSystemTrayIcon.MessageIcon(QSystemTrayIcon.Critical)
