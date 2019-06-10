@@ -16,7 +16,7 @@ class Analyser:
         text = text.split()
         for word in text:
             if self.state == STATE['NORMAL']:
-                self.normalStateProcess(word)        
+                self.normalStateProcess(word)
             elif self.state == STATE['EXACT']:
                 self.exactStateProcess(word)
 
@@ -24,7 +24,6 @@ class Analyser:
         magicWords = settings['magicWords']
         if word in magicWords:
             self.state = magicWords[word]
-            break
         else:
             self.finalList.append(word)
 
