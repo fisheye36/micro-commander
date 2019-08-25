@@ -4,13 +4,20 @@ from conf import settings
 import sys
 
 from gui.tray import TrayWindow
+from windowmanager import WindowManager
 
 
 class Application:
     APP_NAME = 'MicroCom'
 
+    def __init__(self):
+        self.wm = WindowManager()
+
     def start(self):
         settings.load_configuration()
+        self.wm.subscribe(settings)
+        self.wm.start()
+
         app = QApplication(sys.argv)
 
         if not QSystemTrayIcon.isSystemTrayAvailable():

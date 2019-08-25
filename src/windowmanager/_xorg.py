@@ -1,7 +1,7 @@
 import Xlib
 from Xlib.display import Display
 
-from windowmanager._base import AbstractWindowManager
+from ._base import AbstractWindowManager
 
 
 # TODO check and raiseError
@@ -26,8 +26,7 @@ class WindowManager(AbstractWindowManager):
         self._active_window = None
         self._update_active_window()
 
-    def start(self):
-        # TODO Create thread
+    def run(self):
         self.notify_all()
         while True:  # next_event() sleeps until we get an event
             self._handle_xevent(self.disp.next_event())
