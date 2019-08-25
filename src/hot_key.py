@@ -3,6 +3,7 @@ hot_key.py
 ----------
 Module responsible for setting a hot_key for recording voice.
 
+
 Usage example:
 
 .. code-block:: python
@@ -30,12 +31,9 @@ class HotKey:
         self.hotKey = str(key)
         settings['hotKey'] = self.hotKey
         logger.info("Configuration of hot_key successfully updated.")
-        print(settings['hotKey'])
         return False
 
     def get_hot_key(self):
         return self.hotKey
 
-
 hk = HotKey()
-hk.listen_hot_key()
