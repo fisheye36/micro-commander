@@ -4,7 +4,7 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import (QAction, QApplication, QMessageBox, QMenu, QSystemTrayIcon,
                              QDialog)
 
-from gui.settings import SettingsWindow
+from gui.main_window import SettingsWindow
 from utils import getResource
 
 
@@ -34,7 +34,7 @@ class TrayWindow(QDialog):
 
         self.trayIcon.activated.connect(self.iconActivated)
 
-        icon = QIcon(getResource("logomccpoy.png"))
+        icon = QIcon(getResource("speech.png"))
         self.trayIcon.setIcon(icon)
         self.setWindowIcon(icon)
 
