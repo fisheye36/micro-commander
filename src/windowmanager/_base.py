@@ -1,8 +1,11 @@
+import threading
 from abc import ABC, abstractmethod
 
 
-class AbstractWindowManager(ABC):
+class AbstractWindowManager(threading.Thread, ABC):
     def __init__(self):
+        super(AbstractWindowManager, self).__init__()
+        self.daemon = True
         self._observers = []
 
     def notify_all(self):
