@@ -2,8 +2,8 @@ import sys
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
-from edit_mapping_window import EditMapping
-from add_mapping_window import AddMapping
+from .edit_mapping_window import EditMapping
+from .add_mapping_window import AddMapping
 
 
 class CustomWindow(QWidget):

@@ -1,6 +1,6 @@
 import sys
-from custom_window import CustomWindow
-from edit_mapping_window import EditMapping
+from .custom_window import CustomWindow
+from .edit_mapping_window import EditMapping
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *

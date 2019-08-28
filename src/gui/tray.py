@@ -4,7 +4,7 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import (QAction, QApplication, QMessageBox, QMenu, QSystemTrayIcon,
                              QDialog)
 
-from gui.main_window import SettingsWindow
+from gui.main_window import MainWindow
 from utils import getResource
 
 
@@ -17,7 +17,7 @@ class TrayWindow(QDialog):
 
         self.trayIcon.show()
 
-        self.settingsWindow = SettingsWindow(self)
+        self.settingsWindow = MainWindow(self)
 
     def createActions(self):
         self.settingsAction = QAction("Settings", self, triggered=self.showSettings)
@@ -44,7 +44,7 @@ class TrayWindow(QDialog):
         self.showNotification("TITLE", "BODY")
 
     def showSettings(self):
-        self.settingsWindow.initUI()
+        self.settingsWindow.init_UI()
 
     def showNotification(self, title, body):
         icon = QSystemTrayIcon.MessageIcon(QSystemTrayIcon.Critical)
