@@ -16,10 +16,10 @@ while 1:
         print(response)
 """
 
-
-from recorder import Recorder
-from response_queue import PriorityQueue
 import speech_recognition
+
+from speech.recorder import Recorder
+from speech.response_queue import PriorityQueue
 
 
 class AudioConverter:

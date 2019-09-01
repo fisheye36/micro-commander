@@ -1,9 +1,10 @@
-from PyQt5.QtWidgets import QApplication, QSystemTrayIcon, QMessageBox
-
-from conf import settings
 import sys
 
+from PyQt5.QtWidgets import QApplication, QMessageBox, QSystemTrayIcon
+
+from conf import settings
 from gui.tray import TrayWindow
+from speech.converter_thread import AudioManager
 from windowmanager import WindowManager
 
 
@@ -11,12 +12,14 @@ class Application:
     APP_NAME = 'MicroCom'
 
     def __init__(self):
-        self.wm = WindowManager()
+        self.window_manager = WindowManager()
+        self.audio_manager = AudioManager()
 
     def start(self):
         settings.load_configuration()
-        self.wm.subscribe(settings)
-        self.wm.start()
+        self.window_manager.subscribe(settings)
+        self.window_manager.start()
+        self.audio_manager.start()
 
         app = QApplication(sys.argv)
 
