@@ -14,7 +14,7 @@ class Settings(UserDict):
 
     def __init__(self, *args, **kwargs):
         super(Settings, self).__init__(*args, **kwargs)
-        self._active_program_key = None
+        self._active_mode = None
 
     def load_configuration(self):
         config_path = self._get_config_path().as_posix()
@@ -48,21 +48,21 @@ class Settings(UserDict):
             logger.info("Configuration successfully updated.")
 
     def active(self):
-        return self.data[self._active_program_key]
+        return self.data[self._active_mode]
 
     def notify(self, program_name):
-        self.active_program = program_name
+        self.active_mode = program_name
         # TODO remove below
         print(self.active()['commands'])
 
     @property
-    def active_program(self):
-        return self._active_program_key
+    def active_mode(self):
+        return self._active_mode
 
-    @active_program.setter
-    def active_program(self, program_name):
-        self._active_program_key = self.data['app_mapping'].get(program_name, 'default')
-        logger.info("Context changed - [{}] - [{}]".format(program_name, self._active_program_key))
+    @active_mode.setter
+    def active_mode(self, program_name):
+        self._active_mode = self.data['app_mapping'].get(program_name, 'default')
+        logger.info("Context changed - [{}] - [{}]".format(program_name, self._active_mode))
         # TODO gui notification
 
     @staticmethod

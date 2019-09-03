@@ -18,7 +18,7 @@ class CustomWindow(QWidget):
         self.height = 360
         self.title = "Custom mode"
 
-    def initUI(self):
+    def init_UI(self):
         self.setWindowTitle(self.title)
         self.setGeometry(self.left, self.top, self.width, self.height)
 

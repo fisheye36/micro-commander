@@ -25,7 +25,7 @@ class PriorityQueue(Dict[int, List[str]]):
         indicator - actual request that queue is waiting for.
         """
         super().__init__({})
-        self.indicator: int = 1
+        self.indicator = 1
 
     def push(self, request_number: int, response: str):
         """
