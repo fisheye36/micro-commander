@@ -7,26 +7,35 @@ from key_input import diacritic_mappings
 
 class KeyCombination:
 
-    def __init__(self, key_1, key_2):
+    def __init__(self, *modifiers, real_key):
         """Combination of two keys.
 
-        :param key_1: First key. This key should be not "invasive". e.g. Ctrl, Alt, etc..
-        It is important to avoid the situation where before we press the function key,
-        a letter is printed.
-        :param key_2: Second key. Each key is available here.
+        :param modifiers: List of modifier keys. Those keys should not be generally "invasive", e.g. Ctrl, Alt, etc.
+        It is important to avoid the situation where before we press the function key, a letter is printed.
+        :param real_key: The real and last key. Can be any key.
         """
-        self.key_1 = key_1
-        self.key_2 = key_2
+        self._modifiers = modifiers
+        self._real_key = real_key
+
+    @property
+    def modifiers(self):
+        return self._modifiers
+
+    @property
+    def real_key(self):
+        return self._real_key
 
 
 class FakeKeyboard(KeyboardController):
     """A fake keyboard device that can simulate user pressing keys on a real keyboard."""
 
+    DEFAULT_PRESS_DURATION = 0.0
+
     def __init__(self, diacritic_mapping=diacritic_mappings.POLISH):
         super().__init__()
         self._diacritic_mapping = diacritic_mapping
 
-    def simulate_key(self, key, press_duration=0.0):
+    def simulate_key(self, key, press_duration=DEFAULT_PRESS_DURATION):
         """Simulate a user pressing and holding a key for a brief moment.
 
         :param key: Either a one character string, one of the Key members or a KeyCode.
@@ -36,20 +45,20 @@ class FakeKeyboard(KeyboardController):
         self._wait(press_duration)
         self.release(key)
 
-    def simulate_combination(self, key_combination):
-        """Simulate combination of two keys. For example Ctrl+s (to save) or similar.
-
-        :param key_combination: an instance of KeyCombination.
-        """
-        with self.pressed(key_combination.key_1):
-            self.press(key_combination.key_2)
-            self.release(key_combination.key_1)
-
     def _wait(self, duration):
         if duration:
             sleep(duration)
 
-    def simulate_string(self, string, *, press_duration=0.0, delay=0.01):
+    def simulate_combination(self, key_combination, press_duration=DEFAULT_PRESS_DURATION):
+        """Simulate combination of several keys. For example Ctrl+s (to save), Ctrl+Shift+a or similar.
+
+        :param key_combination: an instance of KeyCombination.
+        :param press_duration: How long the real key has been pressed before being released.
+        """
+        with self.pressed(*key_combination.modifiers):
+            self.simulate_key(key_combination.real_key, press_duration)
+
+    def simulate_string(self, string, *, press_duration=DEFAULT_PRESS_DURATION, delay=0.01):
         """Simulate a user typing a string of text with particular speed.
 
         Locale-specific characters are simulated just as if the user has typed them using specific key combinations.
@@ -63,16 +72,19 @@ class FakeKeyboard(KeyboardController):
         for i, character in enumerate(string, start=1):
             key = self._CONTROL_CODES.get(character, character)
             try:
-                self._simulate_diacritic_key(key, press_duration)
+                self._simulate_diacritic_character(key, press_duration)
             except KeyError:
                 self.simulate_key(key, press_duration)
             if i != char_amount:
                 self._wait(delay)
 
-    def _simulate_diacritic_key(self, key, press_duration):
-        *modifiers, raw_key = self._diacritic_mapping[key]
-        with self.pressed(*modifiers):
-            self.simulate_key(raw_key, press_duration)
+    def _simulate_diacritic_character(self, character, press_duration):
+        key_combination = self._obtain_key_combination_from_mapping(character)
+        self.simulate_combination(key_combination, press_duration)
+
+    def _obtain_key_combination_from_mapping(self, character):
+        *modifiers, raw_key = self._diacritic_mapping[character]
+        return KeyCombination(*modifiers, real_key=raw_key)
 
     @property
     def diacritic_mapping(self):
