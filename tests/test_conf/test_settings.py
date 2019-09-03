@@ -1,12 +1,12 @@
 import json
 
 from conf import settings as glob_settings, default_config
-from decorators import settings
+from decorators import override_settings
 
 DUMMY_SETTINGS = {'dummy': 123}
 
 
-@settings(DUMMY_SETTINGS)
+@override_settings(DUMMY_SETTINGS, only_active=False)
 def test_check_if_settings_decorator_overrides_with_settings():
     assert glob_settings == DUMMY_SETTINGS
 
@@ -39,7 +39,7 @@ def test_load_configuration_should_successfully_load_config_from_file(mocker):
     assert glob_settings == DUMMY_SETTINGS
 
 
-@settings(DUMMY_SETTINGS)
+@override_settings(DUMMY_SETTINGS, only_active=False)
 def test_save_configuration_should_save_config_to_file(mocker):
     mocker.patch('builtins.open', mocker.mock_open())
     mocker.patch('pathlib.Path.mkdir')
