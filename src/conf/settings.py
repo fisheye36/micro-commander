@@ -14,7 +14,7 @@ class Settings(UserDict):
 
     def __init__(self, *args, **kwargs):
         super(Settings, self).__init__(*args, **kwargs)
-        self._active_mode = None
+        self._active_mode = 'default'
 
     def load_configuration(self):
         config_path = self._get_config_path().as_posix()
