@@ -4,6 +4,7 @@ class InsertService:
     def __init__(self, analyser):
         self.name = "INSERT"
         self.analyser = analyser
+        self.explicit = 'dosłownie' #settings.data['general']['key_words']['explicit'] - TODO COS NIE BANGLA 
         self.is_explicit = False
         self.finalList = []
 
@@ -11,7 +12,7 @@ class InsertService:
         self.list = text.split()
 
         for word in self.list:
-            if word == settings['general']['key_words']['explicit'] and self.is_explicit == False:
+            if word == self.explicit and self.is_explicit == False:
                 self.is_explicit = True
             else:
                 if self.is_explicit == True:
@@ -24,7 +25,8 @@ class InsertService:
                         self.finalList.append(word)
                 self.finalList.append(' ')
 
-        del self.finalList[-1]
+        if len(self.finalList) > 0:
+            del self.finalList[-1]
         return self.finalList
 
 if __name__ == "__main__":
