@@ -4,13 +4,27 @@ class InsertService:
     def __init__(self, analyser):
         self.name = "INSERT"
         self.analyser = analyser
+        self.is_explicit = False
+        self.finalList = []
 
     def process(self, text):
-        self.finalList = text.split()
+        self.list = text.split()
 
-        for word in
+        for word in self.list:
+            if word == settings['general']['key_words']['explicit'] and self.is_explicit == False:
+                self.is_explicit = True
+            else:
+                if self.is_explicit == True:
+                    self.finalList.append(word)
+                    self.is_explicit = False
+                else:
+                    if word in settings['keyboard_mapping'].keys():
+                        self.finalList.append(settings['keyboard_mapping'][word])
+                    else:
+                        self.finalList.append(word)
+                self.finalList.append(' ')
 
-
+        del self.finalList[-1]
         return self.finalList
 
 if __name__ == "__main__":

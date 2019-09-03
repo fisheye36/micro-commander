@@ -10,9 +10,9 @@ class Analyser:
 
     def setService(self, text):
         wordList = text.split()
-        if wordList[0] in settings.active()['servicemapping'].keys():
-            serviceName = settings.active()['servicemapping'][wordList[0]]
-            module = importlib.import_module("analyser." + serviceName.lower())
+        if wordList[0] in settings['servicemapping'].keys():
+            serviceName = settings['servicemapping'][wordList[0]]
+            module = importlib.import_module('analyser.' + serviceName.lower())
             service = getattr(module, serviceName)
             self.activeService = service(self)
         else:
