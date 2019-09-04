@@ -23,12 +23,14 @@ data = {
         'zapisz': [':', 'w', Key.enter],
     },
     'Google Chrome': {
-        'nowa-karta': KeyCombination(Key.ctrl, 't'),
+        'nowa-karta':[('ALT', 'F4')],
         'zamknij-kartę': KeyCombination(Key.ctrl, 'w'),
         'wyszukaj': KeyCombination(Key.ctrl, 'l'),
         'znajdź': KeyCombination(Key.ctrl, 'f'),
         'historia': KeyCombination(Key.ctrl, 'h'),
         'pobrane': KeyCombination(Key.ctrl, 'j'),
         'nowe-okno': KeyCombination(Key.ctrl, 'd'),
+        'otworz word' : ['exec', ['bash']]
+        'otworz word' : ['exec', ['/word']]
     }
 }
