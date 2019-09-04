@@ -1,32 +1,41 @@
 from conf import settings
 
 class InsertService:
-    def __init__(self, analyser):
-        self.analyser = analyser
-        self.explicit = settings['general']['key_words']['explicit']
-        self.is_explicit = False
-        self.finalList = []
+    def __init__(self, analyserSettings):
+        self.__analyserSettings = analyserSettings
+        self.__explicit = settings['analysersettings']['explicit']
+        self.__finalList = []
+
+    def _appendSpaceIfNeeded(self):
+        if self.__analyserSettings.getAutoSpace():
+            self.__finalList.append(' ')
+
+    def _deleteSpaceIfNeeded(self):
+        if self.__analyserSettings.getAutoSpace() and len(self.__finalList) > 0:
+            del self.__finalList[-1]
+
+    def _processWordAsExplicit(self, word):
+        self.__finalList.append(word)
+        self._appendSpaceIfNeeded()
+    
+    def _processWord(self, word):
+        if word == self.__explicit:
+            self.__analyserSettings.setExplicit()
+        else:
+            if word in settings['keyboard_mapping'].keys():
+                self.__finalList.append(settings['keyboard_mapping'][word])
+            else:
+                self.__finalList.append(word)
+            self._appendSpaceIfNeeded()
 
     def process(self, text):
-        self.list = text.split()
-
-        for word in self.list:
-            if word == self.explicit and self.is_explicit == False:
-                self.is_explicit = True
+        for word in text.split():
+            if self.__analyserSettings.getExplicit():
+                self._processWordAsExplicit(word)
             else:
-                if self.is_explicit == True:
-                    self.finalList.append(word)
-                    self.is_explicit = False
-                else:
-                    if word in settings['keyboard_mapping'].keys():
-                        self.finalList.append(settings['keyboard_mapping'][word])
-                    else:
-                        self.finalList.append(word)
-                self.finalList.append(' ')
-
-        if len(self.finalList) > 0:
-            del self.finalList[-1]
-        return self.finalList
+                self._processWord(word)
+        self._deleteSpaceIfNeeded()
+        return self.__finalList
 
 if __name__ == "__main__":
     pass

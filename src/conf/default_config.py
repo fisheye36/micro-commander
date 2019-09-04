@@ -1,5 +1,6 @@
 data = {
     'keyboard_mapping' : {
+        'spacja' : ' ',
         'cudzysłów' : '\"',
         'tylda' : "~",
         'wykrzyknik' : '!',
@@ -42,21 +43,26 @@ data = {
         '20' : 'dwadzieścia' # TODO
 
     },
+    'analysersettings': {
+        'autospace' : 'autospace',
+        'explicit' : 'dosłownie'
+
+    },
     'servicemapping': {
-        'komenda' : 'InsertService'
+        'komenda' : 'CommandService'
     },
     'general': {
         'language': 'pl',
-        'key_words': {
-            'explicit' : 'dosłownie'
-        },
     },
     'app_mapping': {
         'plasmashell': 'desktop',
         'konsole': 'terminal',
     },
     'default': {
-        'commands': []
+        'commands': {
+            'zamknij' : [('alt', 'f4')],
+            'vim zapisz i zamknij' : [':', 'wq', ('enter')]
+        }
     },
     'terminal': {
         'commands': []
