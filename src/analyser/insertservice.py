@@ -2,9 +2,8 @@ from conf import settings
 
 class InsertService:
     def __init__(self, analyser):
-        self.name = "INSERT"
         self.analyser = analyser
-        self.explicit = 'dosłownie' #settings.data['general']['key_words']['explicit'] - TODO COS NIE BANGLA 
+        self.explicit = settings['general']['key_words']['explicit']
         self.is_explicit = False
         self.finalList = []
 

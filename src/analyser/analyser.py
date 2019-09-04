@@ -6,9 +6,8 @@ import importlib
 class Analyser:
     def __init__(self):
         self.finalList = []
-        self.activeService = InsertService(self)
 
-    def setService(self, text):
+    def _setService(self, text):
         wordList = text.split()
         if wordList[0] in settings['servicemapping'].keys():
             serviceName = settings['servicemapping'][wordList[0]]
@@ -19,7 +18,7 @@ class Analyser:
             self.activeService = InsertService(self)
 
     def analyse(self, text):
-        self.setService(text)
+        self._setService(text)
         self.finalList = self.activeService.process(text)
         return self.finalList
 
