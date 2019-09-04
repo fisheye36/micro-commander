@@ -22,18 +22,11 @@ def test_when_only_active_should_override_whole_settings():
     assert settings['general']['language'] == 'pl'
 
 
-@override_settings({'keyboard_mapping' : {
-        'cudzysłów' : '\"'
-    },'general': {
-        'language': 'pl',
-        'key_words': {
-            'explicit' : 'dosłownie'
-        },
-    }, 'servicemapping': {'komenda': 'InsertService'}}, only_active=False)
+@override_settings(data, only_active=False)
 def test_shoud_correctly_set_service():
-    text = "komenda Ala ma kota"
+    text = "Ala ma kota"
     sut = Analyser()
-    assert ["komenda", " ", "Ala"," ", "ma"," ", "kota"] == sut.analyse(text)
+    assert ["Ala"," ", "ma"," ", "kota"] == sut.analyse(text)
 
 @override_settings(data, only_active=False)
 def test_lalalalala1():
@@ -63,4 +56,42 @@ def test_lalalalala2():
     result += sut.analyse("cudzysłów")
 
     assert 'alias todo=\"vim ~./todo\"' == "".join(result)
+
+@override_settings(data, only_active=False)
+def test_lalalalalala2():
+    sut = Analyser()
+    sut.analyse("komenda auto Space")
+    result = sut.analyse("alias spacja to do równe cudzysłów vim spacja tylda kropka ukośnik to do cudzysłów")
+    assert 'alias todo=\"vim ~./todo\"' == "".join(result)
+    
+
+@override_settings(data, only_active=False)
+def test_lalalalala3():
+    sut = Analyser()
+    text = "komenda auto Space"
+    assert ["Ala"," ", "ma"," ", "kota"] == sut.analyse("Ala ma kota")
+    sut.analyse(text)
+    assert ["Ala", "ma", "kota"] == sut.analyse("Ala ma kota")
+    sut.analyse(text)
+    assert ["Ala"," ", "ma"," ", "kota"] == sut.analyse("Ala ma kota")
+
+@override_settings(data, only_active=False)
+def test_lalalalala5():
+    sut = Analyser()
+    sut.analyse("komenda auto Space")
+    assert [('alt', 'f4')] == sut.analyse("komenda zamknij")
+
+@override_settings(data, only_active=False)
+def test_lalalalala6():
+    sut = Analyser()
+    assert [':', 'wq', ('enter')] == sut.analyse("komenda vim zapisz i zamknij")
+    sut.analyse("komenda auto Space")
+    assert [':', 'wq', ('enter')] == sut.analyse("komenda vim spacja zapisz spacja i spacja zamknij")
+
+
+
+
+
+
+
     

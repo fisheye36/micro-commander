@@ -1,11 +1,13 @@
 from conf import settings
 from copy import deepcopy
 from analyser.insertservice import InsertService
+from analyser.analysersettings import AnalyserSettings
 import importlib
 
 class Analyser:
     def __init__(self):
         self.finalList = []
+        self.__analyserSettings = AnalyserSettings()
 
     def _setService(self, text):
         wordList = text.split()
@@ -13,9 +15,9 @@ class Analyser:
             serviceName = settings['servicemapping'][wordList[0]]
             module = importlib.import_module('analyser.' + serviceName.lower())
             service = getattr(module, serviceName)
-            self.activeService = service(self)
+            self.activeService = service(self.__analyserSettings)
         else:
-            self.activeService = InsertService(self)
+            self.activeService = InsertService(self.__analyserSettings)
 
     def analyse(self, text):
         self._setService(text)
