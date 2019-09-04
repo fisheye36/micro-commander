@@ -30,7 +30,6 @@ data = {
         'historia': KeyCombination(Key.ctrl, 'h'),
         'pobrane': KeyCombination(Key.ctrl, 'j'),
         'nowe-okno': KeyCombination(Key.ctrl, 'd'),
-        'dupa' : ['rakoczy jest głupi'],
         'otworz word' : ['exec', ['bash']]
         'otworz word' : ['exec', ['/word']]
     }
