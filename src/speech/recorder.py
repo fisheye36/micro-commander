@@ -1,4 +1,5 @@
 import threading
+import time
 
 import speech_recognition
 import logger
@@ -52,6 +53,8 @@ class Recorder:
                     pass
                 else:
                     if self.is_actually_run[0]:
+                        logger.info("Recorder: New recording [{}]".format(
+                            time.strftime("%a, %d %b %Y %H:%M:%S", time.gmtime())))
                         self.callback(audio)
 
     def callback(self, audio):
