@@ -42,7 +42,7 @@ data = {
         'zapisz': [':', 'w', Key.enter],
         'insert': ['i', Key.enter],
         'cofnij': ['u', Key.u],
-        'tryb-normalny': [Key.escape],
+        'tryb normalny': [Key.escape],
         'tryb-zamień': [Key.R],
         'zapisz-i-wyjdź': [':', 'w', 'q', Key.enter],
     },

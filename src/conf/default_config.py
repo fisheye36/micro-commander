@@ -65,7 +65,12 @@ data = {
     'default': {
         'commands': {
             'zamknij': [(Key.alt, Key.f4)],
-            'vim zapisz i zamknij': [':', 'wq', Key.enter]
+            'vim zapisz i zamknij': [':', 'wq', Key.enter],
+            'vim wyjdź': [':', 'q', Key.enter],
+            'vim zapisz': [':', 'w', Key.enter],
+            'vim insert': ['i', Key.enter],
+            'vim cofnij': ['u'],
+            'vim tryb normalny': [Key.esc]
         }
     },
     'terminal': {
