@@ -45,23 +45,30 @@ class PriorityQueue(Dict[int, List[str]]):
         words = response.split()
         self[request_number] = words
 
-    def pull(self) -> str:
+    def pull(self):
         """
         Returns one word from queue if is not empty, empty str otherwise.
         """
-        return self.__get_word()
+        return self.__get_response()
 
-    def __get_word(self) -> str:
+    def __get_response(self):
         """
-        Returns single word or empty string when we are still
-        waiting for the response.
+        Returns a list containing received words.
         """
         if self.indicator in self:
             if self[self.indicator]:
-                word = self[self.indicator][0]
-                del self[self.indicator][0]
-                return word
+                response = self[self.indicator]
+                del self[self.indicator]
+                self.indicator += 1
+                return response
             else:
                 self.indicator += 1
-                return self.__get_word()
-        return ''
+                return self.__get_response()
+        return []
+
+    def is_response_available(self):
+        """
+        Returns True if suitable response is actually in the queue.
+        False otherwise.
+        """
+        return self.indicator in self

@@ -17,11 +17,12 @@ class AudioManager(threading.Thread):
     def run(self):
         self.audio_converter.start()
         responses = []
-        while 1:
+        while True:
+            if not self.audio_converter.response_queue.is_response_available():
+                continue
             response_word = self.audio_converter.get_response()
-            if response_word:
-                responses.append(response_word)
-            if len(responses) >= 3:
+            responses.extend(response_word)
+            if len(responses) >= 3:  # TODO we can't depend on it!
                 analyzed_keys = self.analyser.analyse(' '.join(responses))
                 print(analyzed_keys)
                 self.fake_keyboard.simulate(analyzed_keys)
