@@ -1,4 +1,4 @@
-import json
+import pickle
 
 from conf import settings as glob_settings, default_config
 from decorators import override_settings
@@ -32,8 +32,8 @@ def test_load_configuration_should_load_default_settings_when_IOError(mocker):
 
 
 def test_load_configuration_should_successfully_load_config_from_file(mocker):
-    settings_json = json.dumps(DUMMY_SETTINGS)
-    m = mocker.mock_open(read_data=settings_json)
+    settings_pickle = pickle.dumps(DUMMY_SETTINGS)
+    m = mocker.mock_open(read_data=settings_pickle)
     mocker.patch('builtins.open', m)
     glob_settings.load_configuration()
     assert glob_settings == DUMMY_SETTINGS
@@ -43,6 +43,6 @@ def test_load_configuration_should_successfully_load_config_from_file(mocker):
 def test_save_configuration_should_save_config_to_file(mocker):
     mocker.patch('builtins.open', mocker.mock_open())
     mocker.patch('pathlib.Path.mkdir')
-    m = mocker.patch('json.dump')
+    m = mocker.patch('pickle.dump')
     glob_settings.save_configuration()
     m.assert_called_once_with(DUMMY_SETTINGS, mocker.ANY)

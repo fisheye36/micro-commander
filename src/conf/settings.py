@@ -1,4 +1,4 @@
-import json
+import pickle
 from collections import UserDict
 from pathlib import Path
 
@@ -10,7 +10,7 @@ class Settings(UserDict):
     """
     This class is responsible for loading and storing the configuration of the application.
     """
-    REL_CONFIG_PATH = '.config/micro-commander/config.json'
+    REL_CONFIG_PATH = '.config/micro-commander/config'
 
     def __init__(self, *args, **kwargs):
         super(Settings, self).__init__(*args, **kwargs)
@@ -20,8 +20,8 @@ class Settings(UserDict):
         config_path = self._get_config_path().as_posix()
         logger.info("Loading configuration from {}".format(config_path))
         try:
-            with open(config_path) as f:
-                self.data = json.load(f)
+            with open(config_path, 'rb') as f:
+                self.data = pickle.load(f)
         except FileNotFoundError:
             logger.warning("Configuration file not found.")
             self._load_default_configuration()
@@ -40,8 +40,8 @@ class Settings(UserDict):
         try:
             config_path = self._get_config_path()
             config_path.parent.mkdir(0o755, parents=True, exist_ok=True)
-            with open(config_path.as_posix(), 'w') as f:
-                json.dump(self.data, f)
+            with open(config_path.as_posix(), 'wb') as f:
+                pickle.dump(self.data, f)
         except IOError:
             logger.exception("Saving configuration failed")
         else:
