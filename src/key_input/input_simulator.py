@@ -39,14 +39,14 @@ class FakeKeyboard(KeyboardController):
     def simulate(self, key_list, press_duration=DEFAULT_PRESS_DURATION):
         logger.info('entries to simulate: {}'.format(len(key_list)))
         for entry in key_list:
-            if isinstance(entry, str) and len(entry) > 1:
+            if isinstance(entry, str):
                 logger.info("entry '{}' is a string".format(entry))
                 self.simulate_string(entry, press_duration=press_duration)
             elif isinstance(entry, tuple):
                 logger.info("entry '{}' is a key combination".format(entry))
                 key_combination = KeyCombination(*entry[:-1], real_key=entry[-1])
                 self.simulate_combination(key_combination, press_duration=press_duration)
-            elif isinstance(entry, (str, Key)):
+            elif isinstance(entry, Key):
                 logger.info("entry '{}' is a single key".format(entry))
                 self.simulate_key(entry, press_duration=press_duration)
             else:

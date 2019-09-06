@@ -22,8 +22,8 @@ class AudioManager(threading.Thread):
                 continue
             response_word = self.audio_converter.get_response()
             responses.extend(response_word)
-            if len(responses) >= 3:  # TODO we can't depend on it!
-                analyzed_keys = self.analyser.analyse(' '.join(responses))
-                print(analyzed_keys)
-                self.fake_keyboard.simulate(analyzed_keys)
-                responses.clear()
+            
+            analyzed_keys = self.analyser.analyse(' '.join(responses))
+            print(analyzed_keys)
+            self.fake_keyboard.simulate(analyzed_keys)
+            responses.clear()

@@ -3,8 +3,8 @@ from pynput.keyboard import Key
 
 data = {
     'keyboard_mapping': {
-        'enter': Key.enter,
-        'spacja': Key.space,
+        'enter': '\n',
+        'spacja': ' ',
         'cudzysłów': '\"',
         'tylda': "~",
         'wykrzyknik': '!',
@@ -25,7 +25,7 @@ data = {
         'przecinek': ',',
         'ukośnik': '/',
         'apostrof': '\'',
-        'jeden': '1',  # jeden, raz, jedynka - google nie ogarnia
+        'jeden': '1',
         '2': 'dwa',
         '3': 'trzy',
         '4': 'cztery',
@@ -65,7 +65,12 @@ data = {
     'default': {
         'commands': {
             'zamknij': [(Key.alt, Key.f4)],
-            'vim zapisz i zamknij': [':', 'wq', Key.enter]
+            'vim zapisz i zamknij': [':', 'wq', Key.enter],
+            'vim wyjdź': [':', 'q', Key.enter],
+            'vim zapisz': [':', 'w', Key.enter],
+            'vim insert': ['i', Key.enter],
+            'vim cofnij': ['u'],
+            'vim tryb normalny': [Key.esc]
         }
     },
     'terminal': {
