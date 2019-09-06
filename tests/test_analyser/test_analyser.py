@@ -1,6 +1,7 @@
 from decorators import settings, override_settings
 from analyser import Analyser
 from conf.default_config import data
+from pynput.keyboard import Key
 
 @override_settings({'commands': {'exit': '\ALT+\F4'}})
 def test_by_default_should_override_only_active_settings():
@@ -79,14 +80,14 @@ def test_lalalalala3():
 def test_lalalalala5():
     sut = Analyser()
     sut.analyse("komenda auto Space")
-    assert [('alt', 'f4')] == sut.analyse("komenda zamknij")
+    assert [(Key.alt, Key.f4)] == sut.analyse("komenda zamknij")
 
 @override_settings(data, only_active=False)
 def test_lalalalala6():
     sut = Analyser()
-    assert [':', 'wq', ('enter')] == sut.analyse("komenda vim zapisz i zamknij")
+    assert [':', 'wq', Key.enter] == sut.analyse("komenda vim zapisz i zamknij")
     sut.analyse("komenda auto Space")
-    assert [':', 'wq', ('enter')] == sut.analyse("komenda vim spacja zapisz spacja i spacja zamknij")
+    assert [':', 'wq', Key.enter] == sut.analyse("komenda vim spacja zapisz spacja i spacja zamknij")
 
 
 

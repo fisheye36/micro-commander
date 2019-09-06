@@ -7,6 +7,12 @@ class CommandService(InsertService):
         self.__analyserSettings = analyserSettings
         self.__finalList = []
 
+    def _checkIfAllListElementsAreStrings(self, listOfWords):
+        for el in listOfWords:
+            if not isinstance(el, str):
+                return False
+        return True
+
     def _processAsCommand(self, words):
         command = ''.join(words)
         if command in settings.active()['commands'].keys():
@@ -16,6 +22,8 @@ class CommandService(InsertService):
 
 
     def _processAsAnalyserSettings(self, listOfWords):
+        if not self._checkIfAllListElementsAreStrings(listOfWords):
+            return False
         command = ''.join(listOfWords).lower()
         if command == settings['analysersettings']['autospace']:
             self.__analyserSettings.switchAutoSpace()
