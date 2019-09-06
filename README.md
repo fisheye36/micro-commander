@@ -16,4 +16,4 @@ Run `make install` or
 
 ## Hints
 - run `make help`
-- In case of a `PyAudio` collecting issue, you device probably does not have a `portaudio` library. Please consider installig the module by typing `sudo apt-get install libasound-dev` or building it manually.
+- In case of `PyAudio` collecting issue, your device probably does not have the `portaudio` library. Please consider installig the module by typing `sudo apt-get install libasound-dev` or building it manually.
