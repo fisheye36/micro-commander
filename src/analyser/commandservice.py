@@ -7,12 +7,6 @@ class CommandService(InsertService):
         self.__analyserSettings = analyserSettings
         self.__finalList = []
 
-    def _checkIfAllListElementsAreStrings(self, listOfWords):
-        for el in listOfWords:
-            if not isinstance(el, str):
-                return False
-        return True
-
     def _processAsCommand(self, words):
         command = ''.join(words)
         if command in settings.active()['commands'].keys():

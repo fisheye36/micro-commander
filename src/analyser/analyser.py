@@ -11,8 +11,8 @@ class Analyser:
 
     def _setService(self, text):
         wordList = text.split()
-        if wordList[0] in settings['servicemapping'].keys():
-            serviceName = settings['servicemapping'][wordList[0]]
+        if wordList[0].lower() in settings['servicemapping'].keys():
+            serviceName = settings['servicemapping'][wordList[0].lower()]
             module = importlib.import_module('analyser.' + serviceName.lower())
             service = getattr(module, serviceName)
             self.activeService = service(self.__analyserSettings)
