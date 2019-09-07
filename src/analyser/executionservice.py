@@ -17,9 +17,7 @@ class ExecutionService(InsertService):
                 lenOfKeyElements = len(key.split())
                 del words[:lenOfKeyElements]
                 try:
-                    print(words)
                     words.insert(0, dic[key])
-                    print(words)
                     subprocess.run(words)
                 except:
                     logger.info('Something went wrong when trying to execute command')
