@@ -32,7 +32,7 @@ class WindowManager(AbstractWindowManager):
             self._handle_xevent(self.disp.next_event())
 
     def get_active_program_name(self):
-        return self._active_window.get_wm_class()[1]
+        return self._active_window.get_wm_class()[1] # TODO : Rudy - napraw bo exception leci czasmi
 
     def _handle_xevent(self, event):
         if event.type != Xlib.X.PropertyNotify:

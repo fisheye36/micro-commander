@@ -1,4 +1,5 @@
 from conf import settings
+import logger
 
 class InsertService:
     def __init__(self, analyserSettings):

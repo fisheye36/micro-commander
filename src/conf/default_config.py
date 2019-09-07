@@ -49,11 +49,13 @@ data = {
     },
     'analysersettings': {
         'autospace': 'autospace',
-        'explicit': 'dosłownie'
+        'explicit': 'dosłownie',
+        'deleteAll': 'wszystko'
     },
     'servicemapping': {
         'komenda': 'CommandService',
-        'uruchom': 'ExecutionService'
+        'uruchom': 'ExecutionService',
+        'usuń': 'BackspaceService'
     },
     'execute': {
         'edytor kodu' : '/snap/bin/code',
