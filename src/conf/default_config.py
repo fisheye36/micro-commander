@@ -50,10 +50,14 @@ data = {
     'analysersettings': {
         'autospace': 'autospace',
         'explicit': 'dosłownie'
-
     },
     'servicemapping': {
-        'komenda': 'CommandService'
+        'komenda': 'CommandService',
+        'uruchom': 'ExecutionService'
+    },
+    'execute': {
+        'edytor kodu' : '/snap/bin/code',
+        'przeglądarka' : 'chromium-browser'
     },
     'general': {
         'language': 'pl',
