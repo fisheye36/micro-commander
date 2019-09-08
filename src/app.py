@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import QApplication, QMessageBox, QSystemTrayIcon
 
 from conf import settings
 from gui.tray import TrayWindow
+from gui.main_window import MainWindow
 from speech.converter_thread import AudioManager
 from windowmanager import WindowManager
 
@@ -22,6 +23,7 @@ class Application:
         self.audio_manager.start()
 
         app = QApplication(sys.argv)
+        main_window = MainWindow()
 
         if not QSystemTrayIcon.isSystemTrayAvailable():
             QMessageBox.critical(None, self.APP_NAME,
@@ -30,7 +32,7 @@ class Application:
 
         app.setQuitOnLastWindowClosed(False)
 
-        window = TrayWindow()
+        window = TrayWindow(main_window)
         sys.exit(app.exec_())
 
 
