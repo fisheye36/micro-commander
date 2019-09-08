@@ -5,12 +5,11 @@ from PyQt5.QtWidgets import (QAction, QApplication, QMessageBox, QMenu, QSystemT
                              QDialog)
 
 from gui.main_window import MainWindow
-from gui.processed_text_window import ProcessedText
 from utils import getResource
 
 
 class TrayWindow(QDialog):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, main_window, *args, **kwargs):
         super(TrayWindow, self).__init__(*args, **kwargs)
 
         self.createActions()
@@ -18,18 +17,14 @@ class TrayWindow(QDialog):
 
         self.trayIcon.show()
 
-        self.settingsWindow = MainWindow()
-        self.processedText = ProcessedText(self, *args, **kwargs)
+        self.settingsWindow = main_window
 
     def createActions(self):
-        self.windowsProccesing = QAction("Proccesed speech", self, triggered=self.showWindows)
         self.settingsAction = QAction("Settings", self, triggered=self.showSettings)
         self.quitAction = QAction("Quit", self, triggered=QApplication.instance().quit)
 
     def createTrayIcon(self):
         self.trayIconMenu = QMenu(self)
-        self.trayIconMenu.addAction(self.windowsProccesing)
-        self.trayIconMenu.addSeparator()
         self.trayIconMenu.addAction(self.settingsAction)
         self.trayIconMenu.addSeparator()
         self.trayIconMenu.addAction(self.quitAction)
@@ -49,10 +44,7 @@ class TrayWindow(QDialog):
         self.showNotification("Micro commander", "Status: running")
 
     def showSettings(self):
-        self.settingsWindow.init_UI()
-
-    def showWindows(self):
-        self.processedText.open_window()
+        self.settingsWindow.show()
 
     def showNotification(self, title, body):
         icon = QSystemTrayIcon.MessageIcon(QSystemTrayIcon.Critical)
