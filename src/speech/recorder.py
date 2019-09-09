@@ -1,7 +1,8 @@
 import threading
 import time
 
-import speech_recognition
+from speech_recognition import Microphone, RequestError, WaitTimeoutError
+
 import logger
 
 
@@ -9,10 +10,19 @@ class Recorder:
 
     def __init__(self, recognizer, queue):
         self.recognizer = recognizer
-        self.microphone = speech_recognition.Microphone()
+        self.microphone = Microphone()
         self.indicator = 0
         self.queue = queue
         self.is_actually_run = None
+        self.err_no_net = False
+        self.service_key = self.load_service_key()
+
+    @staticmethod
+    def load_service_key():
+        # tymczasowo, bo mam podpieta tam karte kredytowa i musze jakos
+        # ogarnac zeby mi nie bralo hajsu po przekroczeniu tego limitu xd
+        # to jest klucz darmowy:
+        return 'AIzaSyBOti4mM-6x9WDnZIjIeyEU21OpBXqWBgw'
 
     def get_indicator(self):
         """
@@ -45,11 +55,11 @@ class Recorder:
         recording will start again.
         """
         self.is_actually_run = [True]
-        with self.microphone as mic:
+        with self.microphone as _:
             while self.is_actually_run[0]:
                 try:
                     audio = self.recognizer.listen(self.microphone, timeout=timeout)
-                except speech_recognition.WaitTimeoutError:
+                except WaitTimeoutError:
                     pass
                 else:
                     if self.is_actually_run[0]:
@@ -66,8 +76,11 @@ class Recorder:
         raises an exception. It is not an error so it should be logged as info.
         """
         try:
-            text_output = self.recognizer.recognize_google(audio, language='pl-PL')
+            text_output = self.recognizer.recognize_google(audio, language='pl-PL', key=self.service_key)
             self.queue.push(self.get_indicator(), text_output)
+        except RequestError:
+            self.err_no_net = True
+            logger.exception('ERR_NO_NET: Network connection lost.')
         except:
             logger.info(msg='Unable to transcript the sound data.')
         else:
