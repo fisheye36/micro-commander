@@ -7,6 +7,7 @@ from PyQt5.QtWidgets import *
 from conf import settings
 from gui.add_mode_window import AddModeWindow
 from utils import getResource
+from .tray import TrayWindow
 
 
 class MainWindow(QDialog):
@@ -98,8 +99,7 @@ class MainWindow(QDialog):
             json.loads(self.console.toPlainText().replace("'", "\""))
             settings[self.combo_mode.currentText()] = self.console.toPlainText()
         except ValueError:
-            #TODO notification error
-            print("blad")
+            TrayWindow.showNotification("JSONParser", "Blad parsowania")
         else:
             self.save_b.setVisible(False)
             self.cancel_b.setVisible(False)
