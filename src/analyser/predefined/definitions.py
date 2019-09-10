@@ -35,7 +35,7 @@ data = {
         'kursywa': KeyCombination(Key.ctrl, 'i'),
         'podkreśl': KeyCombination(Key.ctrl, 'u'),
         'cofnij': KeyCombination(Key.ctrl, 'z'),
-        'zaznacz': KeyCombination(Key.ctrl, 'a'),
+        'zaznacz': KeyCombination(Key.ctrl, 'a')
     },
     'Vim Editor': {
         'wyjdź': [':', 'q', Key.enter],

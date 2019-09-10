@@ -4,6 +4,7 @@ from pathlib import Path
 
 import logger
 from conf import default_config
+from gui.tray import TrayWindow
 
 
 class Settings(UserDict):
@@ -52,8 +53,6 @@ class Settings(UserDict):
 
     def notify(self, program_name):
         self.active_mode = program_name
-        # TODO remove below
-        print(self.active()['commands'])
 
     @property
     def active_mode(self):
@@ -63,7 +62,7 @@ class Settings(UserDict):
     def active_mode(self, program_name):
         self._active_mode = self.data['app_mapping'].get(program_name, 'default')
         logger.info("Context changed - [{}] - [{}]".format(program_name, self._active_mode))
-        # TODO gui notification
+        TrayWindow.showNotification('Context changed', self._active_mode)
 
     @staticmethod
     def _get_config_path():

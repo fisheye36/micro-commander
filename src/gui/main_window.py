@@ -50,8 +50,7 @@ class MainWindow(QDialog):
 
         self.combo_mode = QComboBox()
         for key in settings.keys():
-            if "commands" in settings[key]:
-                self.combo_mode.addItem(key)
+            self.combo_mode.addItem(key)
         self.combo_mode.setContentsMargins(20, 20, 20, 20)
         self.combo_mode.currentIndexChanged.connect(lambda: self.current_mode_in_console())
         self.menu.addWidget(self.combo_mode)
@@ -126,5 +125,4 @@ class MainWindow(QDialog):
     def refresh(self):
         self.combo_mode.clear()
         for key in settings.keys():
-            if "commands" in settings[key]:
-                self.combo_mode.addItem(key)
+            self.combo_mode.addItem(key)

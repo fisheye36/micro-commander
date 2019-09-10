@@ -65,7 +65,7 @@ data = {
         'komenda': 'CommandService',
         'uruchom': 'ExecutionService',
         'usuń': 'BackspaceService',
-        'ustawienia' : 'SettingsService',
+        'ustawienia' : 'SettingsService'
     },
     'execute': {
         'edytor kodu' : '/snap/bin/code',
@@ -77,25 +77,22 @@ data = {
     'app_mapping': {
         'plasmashell': 'desktop',
         'konsole': 'terminal',
+        'chromium-browser' : 'browser',
+        'gnome-terminal' : 'terminal'
     },
     'default': {
         'commands': {
-            'zamknij': [(Key.alt, Key.f4)],
-            'vim zapisz i zamknij': [':', 'wq', Key.enter],
-            'vim wyjdź': [':', 'q', Key.enter],
-            'vim zapisz': [':', 'w', Key.enter],
-            'vim insert': ['i', Key.enter],
-            'vim cofnij': ['u'],
-            'vim tryb normalny': [Key.esc]
+            'zamknij': [(Key.alt, Key.f4)]
         }
     },
-    'chromium-browser': {
+    'browser': {
         'commands': {
-            'nowa-karta': [(Key.ctrl, 't')],
-            'zamknij-kartę': [(Key.ctrl, 'w')],
+            'zamknij' : [(Key.alt, Key.f4)],
+            'nowa karta': [(Key.ctrl, 't')],
+            'zamknij kartę': [(Key.ctrl, 'w')],
             'cofnij': [(Key.backspace)],
             'odśwież': [Key.f5],
-            'strona-domowa': [(Key.alt, Key.home)],
+            'strona domowa': [(Key.alt, Key.home)],
             'wyszukaj': [(Key.ctrl, 'l')],
             'znajdź': [(Key.ctrl, 'f')],
             'historia': [(Key.ctrl, 'h')],
@@ -107,7 +104,14 @@ data = {
         }
     },
     'terminal': {
-        'commands': []
+        'commands': {
+            'vim zapisz i zamknij': [':', 'wq', Key.enter],
+            'vim wyjdź': [':', 'q', Key.enter],
+            'vim zapisz': [':', 'w', Key.enter],
+            'vim insert': ['i', Key.enter],
+            'vim cofnij': ['u'],
+            'vim tryb normalny': [Key.esc],
+        }
     },
     'desktop': {
         'commands': []
