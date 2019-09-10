@@ -7,12 +7,6 @@ class InsertService:
         self.__explicit = settings['analysersettings']['explicit']
         self.__finalList = []
 
-    def _checkIfAllListElementsAreStrings(self, listOfWords):
-        for el in listOfWords:
-            if not isinstance(el, str):
-                return False
-        return True
-
     def _appendSpaceIfNeeded(self):
         if self.__analyserSettings.getAutoSpace():
             self.__finalList.append(' ')

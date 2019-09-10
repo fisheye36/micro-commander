@@ -25,6 +25,14 @@ data = {
         'przecinek': ',',
         'ukośnik': '/',
         'apostrof': '\'',
+        'lewy nawias' : '(',
+        'prawy nawias' : ')',
+        'lewy nawias kwadratowy' : '[',
+        'prawy nawias kwadratowy' : ']',
+        'lewy nawias klamrowy' : '{',
+        'prawy nawias klamrowy' : '}',
+        'mniej niż' : '<',
+        'więcej niż' : '>',
         'jeden': '1',
         '2': 'dwa',
         '3': 'trzy',
@@ -44,18 +52,20 @@ data = {
         '17': 'siedemnaście',
         '18': 'osiemnaście',
         '19': 'dziewiętnaście',
-        '20': 'dwadzieścia'  # TODO
-
+        '20': 'dwadzieścia'
     },
     'analysersettings': {
-        'autospace': 'autospace',
+        'autospace': 'auto space',
         'explicit': 'dosłownie',
-        'deleteAll': 'wszystko'
+        'deleteAll': 'wszystko',
+        'micOn': 'włącz',
+        'micOff': 'wyłącz'
     },
     'servicemapping': {
         'komenda': 'CommandService',
         'uruchom': 'ExecutionService',
-        'usuń': 'BackspaceService'
+        'usuń': 'BackspaceService',
+        'ustawienia' : 'SettingsService',
     },
     'execute': {
         'edytor kodu' : '/snap/bin/code',
@@ -77,6 +87,23 @@ data = {
             'vim insert': ['i', Key.enter],
             'vim cofnij': ['u'],
             'vim tryb normalny': [Key.esc]
+        }
+    },
+    'chromium-browser': {
+        'commands': {
+            'nowa-karta': [(Key.ctrl, 't')],
+            'zamknij-kartę': [(Key.ctrl, 'w')],
+            'cofnij': [(Key.backspace)],
+            'odśwież': [Key.f5],
+            'strona-domowa': [(Key.alt, Key.home)],
+            'wyszukaj': [(Key.ctrl, 'l')],
+            'znajdź': [(Key.ctrl, 'f')],
+            'historia': [(Key.ctrl, 'h')],
+            'pobrane': [(Key.ctrl, 'j')],
+            'nowe-okno': [(Key.ctrl, 'd')],
+            'konsola': [Key.f12],
+            'enter': [Key.enter],
+            'incognito': [(Key.ctrl, Key.shift, 'n')],
         }
     },
     'terminal': {
