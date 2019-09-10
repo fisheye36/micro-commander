@@ -7,3 +7,5 @@ PyQt5
 python-xlib
 SpeechRecognition
 PyAudio
+google-api-python-client
+oauth2client
