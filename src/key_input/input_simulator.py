@@ -26,13 +26,6 @@ class KeyCombination:
     def real_key(self):
         return self._real_key
 
-    # def __str__(self):
-
-
-    # @static
-    # def unpack(serialized):
-    #     return KeyCombination()
-
 
 class FakeKeyboard(KeyboardController):
     """A fake keyboard device that can simulate user pressing keys on a real keyboard."""
