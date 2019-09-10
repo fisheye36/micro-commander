@@ -1,15 +1,17 @@
 from conf import settings
 from analyser.insertservice import InsertService
+import analyser.analyserhelper as Helper
 import subprocess
 import logger
 
 class ExecutionService(InsertService):
     def __init__(self, analyserSettings):
         InsertService.__init__(self, analyserSettings)
+        logger.info('Entering dedicated Execution Service')
         self.__finalList = []
 
     def _execute(self, words):
-        words = [x for x in words if x != ' ']
+        words = [word for word in words if word != ' ']
 
         dic = settings['execute']
         for key in dic:
@@ -27,13 +29,12 @@ class ExecutionService(InsertService):
         del listOfWords[0]
         words = super().process(' '.join(listOfWords))
 
-        if not self._checkIfAllListElementsAreStrings(words):
-            logger.info('Something went wrong')
-            return []
-        
-        self._execute(words)
+        if not Helper.checkIfAllListElementsAreStrings(words):
+            logger.info('Unexpected input')
+        else:
+            self._execute(words)
 
-        return []
+        return self.__finalList
         
 
 if __name__ == "__main__":

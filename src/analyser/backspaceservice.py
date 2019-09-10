@@ -1,9 +1,9 @@
 from conf import settings
-from analyser.insertservice import InsertService
 from pynput.keyboard import Key
 import logger
+from analyser.insertservice import InsertService
 
-class BackspaceService:
+class BackspaceService(InsertService):
     def __init__(self, analyserSettings):
         logger.info('Entering dedicated Backspace Service')
         self.__finalList = []
