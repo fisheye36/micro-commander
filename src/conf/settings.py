@@ -62,7 +62,7 @@ class Settings(UserDict):
     def active_mode(self, program_name):
         self._active_mode = self.data['app_mapping'].get(program_name, 'default')
         logger.info("Context changed - [{}] - [{}]".format(program_name, self._active_mode))
-        TrayWindow.showNotification('Context changed', self._active_mode)
+        # TrayWindow.showNotification('Context changed', self._active_mode)
 
     @staticmethod
     def _get_config_path():

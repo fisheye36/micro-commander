@@ -2,6 +2,7 @@ import sys
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from conf import settings
+from .tray import TrayWindow
 
 
 class AddModeWindow(QDialog):
@@ -47,8 +48,7 @@ class AddModeWindow(QDialog):
                 settings.update({self.textbox.text(): {'commands': []}})
                 self.textbox.setText('')
             else:
-                #TODO notification
-                print("klucz instnieje")
+                TrayWindow.showNotification("Error", "Podany klucz istnieje")
         self.close()
 
     def close_window(self):
