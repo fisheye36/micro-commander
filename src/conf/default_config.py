@@ -79,14 +79,16 @@ data = {
         'chromium-browser': 'browser',
         'gnome-terminal': 'terminal'
     },
-    'default': {
+    'common': {
         'commands': {
             'zamknij': [(Key.alt, Key.f4)]
         }
     },
+    'default': {
+        'commands': {}
+    },
     'browser': {
         'commands': {
-            'zamknij': [(Key.alt, Key.f4)],
             'nowa karta': [(Key.ctrl, 't')],
             'zamknij kartę': [(Key.ctrl, 'w')],
             'cofnij': [Key.backspace],
