@@ -2,6 +2,7 @@ import Xlib
 from Xlib.display import Display
 
 from ._base import AbstractWindowManager
+import logger
 
 
 # TODO check and raiseError
@@ -32,7 +33,11 @@ class WindowManager(AbstractWindowManager):
             self._handle_xevent(self.disp.next_event())
 
     def get_active_program_name(self):
-        return self._active_window.get_wm_class()[1] # TODO : Rudy - napraw bo exception leci czasmi
+        try:
+            return self._active_window.get_wm_class()[1]
+        except:
+            logger.exception("_xorg.WindowManager.get_active_program_name failed")
+            return 'FAILED'
 
     def _handle_xevent(self, event):
         if event.type != Xlib.X.PropertyNotify:

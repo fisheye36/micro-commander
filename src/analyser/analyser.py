@@ -3,6 +3,7 @@ from copy import deepcopy
 from analyser.insertservice import InsertService
 from analyser.analysersettings import AnalyserSettings
 import importlib
+import logger
 
 class Analyser:
     def __init__(self):
@@ -21,6 +22,11 @@ class Analyser:
 
     def analyse(self, text):
         self._setService(text)
+        
+        if isinstance(self.activeService, InsertService) and not self.__analyserSettings.getMicState():
+            logger.info("Microphone is turned off")
+            return self.finalList
+
         self.finalList = self.activeService.process(text)
         return self.finalList
 

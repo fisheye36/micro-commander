@@ -4,7 +4,6 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import (QAction, QApplication, QMessageBox, QMenu, QSystemTrayIcon,
                              QDialog)
 
-from gui.main_window import MainWindow
 from utils import getResource
 
 
@@ -44,11 +43,21 @@ class TrayWindow(QDialog):
         self.showNotification("Micro commander", "Status: running")
 
     def showSettings(self):
+        self.showNotification("Ustawienia", "wlaczone")
         self.settingsWindow.show()
 
-    def showNotification(self, title, body):
-        icon = QSystemTrayIcon.MessageIcon(QSystemTrayIcon.Critical)
-        self.trayIcon.showMessage(title, body, icon)
+    @staticmethod
+    def showNotification(title, body):
+        trayIcon = QSystemTrayIcon()
+        trayIcon.setIcon(QIcon(getResource("speech.png")))
+        trayIcon.show()
+        icon = QSystemTrayIcon.MessageIcon(QSystemTrayIcon.Information)
+        trayIcon.showMessage(title, body, icon)
+
+    @staticmethod
+    def show_message(tray, title, body):
+        icon = QSystemTrayIcon.MessageIcon(QSystemTrayIcon.Information)
+        tray.showMessage(title, body, icon)
 
 
 if __name__ == '__main__':
