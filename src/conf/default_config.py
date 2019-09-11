@@ -1,6 +1,5 @@
 from pynput.keyboard import Key
 
-
 data = {
     'keyboard_mapping': {
         'enter': '\n',
@@ -25,14 +24,14 @@ data = {
         'przecinek': ',',
         'ukośnik': '/',
         'apostrof': '\'',
-        'lewy nawias' : '(',
-        'prawy nawias' : ')',
-        'lewy nawias kwadratowy' : '[',
-        'prawy nawias kwadratowy' : ']',
-        'lewy nawias klamrowy' : '{',
-        'prawy nawias klamrowy' : '}',
-        'mniej niż' : '<',
-        'więcej niż' : '>',
+        'lewy nawias': '(',
+        'prawy nawias': ')',
+        'lewy nawias kwadratowy': '[',
+        'prawy nawias kwadratowy': ']',
+        'lewy nawias klamrowy': '{',
+        'prawy nawias klamrowy': '}',
+        'mniej niż': '<',
+        'więcej niż': '>',
         'jeden': '1',
         '2': 'dwa',
         '3': 'trzy',
@@ -65,11 +64,11 @@ data = {
         'komenda': 'CommandService',
         'uruchom': 'ExecutionService',
         'usuń': 'BackspaceService',
-        'ustawienia' : 'SettingsService',
+        'ustawienia': 'SettingsService'
     },
     'execute': {
-        'edytor kodu' : '/snap/bin/code',
-        'przeglądarka' : 'chromium-browser'
+        'edytor kodu': '/snap/bin/code',
+        'przeglądarka': 'chromium-browser'
     },
     'general': {
         'language': 'pl',
@@ -77,25 +76,22 @@ data = {
     'app_mapping': {
         'plasmashell': 'desktop',
         'konsole': 'terminal',
+        'chromium-browser': 'browser',
+        'gnome-terminal': 'terminal'
     },
     'default': {
         'commands': {
-            'zamknij': [(Key.alt, Key.f4)],
-            'vim zapisz i zamknij': [':', 'wq', Key.enter],
-            'vim wyjdź': [':', 'q', Key.enter],
-            'vim zapisz': [':', 'w', Key.enter],
-            'vim insert': ['i', Key.enter],
-            'vim cofnij': ['u'],
-            'vim tryb normalny': [Key.esc]
+            'zamknij': [(Key.alt, Key.f4)]
         }
     },
-    'chromium-browser': {
+    'browser': {
         'commands': {
-            'nowa-karta': [(Key.ctrl, 't')],
-            'zamknij-kartę': [(Key.ctrl, 'w')],
-            'cofnij': [(Key.backspace)],
+            'zamknij': [(Key.alt, Key.f4)],
+            'nowa karta': [(Key.ctrl, 't')],
+            'zamknij kartę': [(Key.ctrl, 'w')],
+            'cofnij': [Key.backspace],
             'odśwież': [Key.f5],
-            'strona-domowa': [(Key.alt, Key.home)],
+            'strona domowa': [(Key.alt, Key.home)],
             'wyszukaj': [(Key.ctrl, 'l')],
             'znajdź': [(Key.ctrl, 'f')],
             'historia': [(Key.ctrl, 'h')],
@@ -107,7 +103,14 @@ data = {
         }
     },
     'terminal': {
-        'commands': []
+        'commands': {
+            'vim zapisz i zamknij': [':', 'wq', Key.enter],
+            'vim wyjdź': [':', 'q', Key.enter],
+            'vim zapisz': [':', 'w', Key.enter],
+            'vim insert': ['i', Key.enter],
+            'vim cofnij': ['u'],
+            'vim tryb normalny': [Key.esc],
+        }
     },
     'desktop': {
         'commands': []

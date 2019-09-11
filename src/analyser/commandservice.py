@@ -10,7 +10,7 @@ class CommandService(InsertService):
         self.__finalList = []
 
     def _processAsCommand(self, words):
-        command = ''.join(words)
+        command = ''.join(words).lower()
         if command in settings.active()['commands'].keys():
             self.__finalList = settings.active()['commands'][command]
             return
