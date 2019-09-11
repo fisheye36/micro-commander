@@ -52,7 +52,7 @@ class AudioManager(threading.Thread):
             # we can't connect to the internet. Stay in this loop
             # until the connection is established.
             try:
-                socket.setdefaulttimeout(timeout=3)
+                socket.setdefaulttimeout(3)
                 socket.socket(socket.AF_INET, socket.SOCK_STREAM).connect(("8.8.8.8", 53))
                 logger.info("Connection probe succeeded: Back to online")
                 # TODO display notification connection back

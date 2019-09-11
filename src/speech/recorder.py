@@ -1,9 +1,10 @@
 import threading
 import time
 
-from speech_recognition import Microphone, RequestError, WaitTimeoutError
+from speech_recognition import Microphone, RequestError, WaitTimeoutError, UnknownValueError
 
 import logger
+from utils import getResource
 
 
 class Recorder:
@@ -15,14 +16,14 @@ class Recorder:
         self.queue = queue
         self.is_actually_run = None
         self.err_no_net = False
-        self.service_key = self.load_service_key()
+        self.service_json = None
+        self.load_service_json()
+        self.service_key = 'AIzaSyBOti4mM-6x9WDnZIjIeyEU21OpBXqWBgw'
+        self.for_free = False
 
-    @staticmethod
-    def load_service_key():
-        # tymczasowo, bo mam podpieta tam karte kredytowa i musze jakos
-        # ogarnac zeby mi nie bralo hajsu po przekroczeniu tego limitu xd
-        # to jest klucz darmowy:
-        return 'AIzaSyBOti4mM-6x9WDnZIjIeyEU21OpBXqWBgw'
+    def load_service_json(self):
+        with open(getResource('service-account-file.json')) as f:
+            self.service_json = f.read()
 
     def get_indicator(self):
         """
@@ -35,6 +36,7 @@ class Recorder:
         """
         Adds a new thread responsible for sound input.
         """
+
         def stop_lister(wait_for_listener=True):
             """
             Waits until the recorder finishes work.
@@ -76,12 +78,18 @@ class Recorder:
         raises an exception. It is not an error so it should be logged as info.
         """
         try:
-            text_output = self.recognizer.recognize_google(audio, language='pl-PL', key=self.service_key)
+            if self.for_free:
+                text_output = self.recognizer.recognize_google(audio, language='pl-PL', key=self.service_key)
+            else:
+                text_output = self.recognizer.recognize_google_cloud(audio, language='pl-PL',
+                                                                     credentials_json=self.service_json)
             self.queue.push(self.get_indicator(), text_output)
         except RequestError:
             self.err_no_net = True
             logger.exception('ERR_NO_NET: Network connection lost.')
+        except UnknownValueError:
+            logger.info('Unable to transcript the sound data.')
         except:
-            logger.info(msg='Unable to transcript the sound data.')
+            logger.exception('Unknown error')
         else:
             logger.info(msg="The recording has been converted successfully.")

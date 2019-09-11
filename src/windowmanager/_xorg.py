@@ -35,8 +35,8 @@ class WindowManager(AbstractWindowManager):
     def get_active_program_name(self):
         try:
             return self._active_window.get_wm_class()[1]
-        except e:
-            logger.exeption(e)
+        except:
+            logger.exception("_xorg.WindowManager.get_active_program_name failed")
             return 'FAILED'
 
     def _handle_xevent(self, event):
