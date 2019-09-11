@@ -1,13 +1,29 @@
+from enum import Enum
 import logger
+
+class CapitalLetters(Enum):
+    OFF = 1
+    AUTO = 2
+    ON = 3
 
 class AnalyserSettings:
     def __init__(self):
         self.__isExplicit = False
         self.__autoSpace = True
         self.__isMicOn = True
-    
+        self.__shift = True
+        self.__capitalLetters = CapitalLetters.AUTO
+
+    def getShiftStateAndClear(self):
+        val = self.__shift
+        self.__shift = False
+        return val
+
     def setExplicit(self):
         self.__isExplicit = True
+
+    def checkExplicit(self):
+        return self.__isExplicit
 
     def getExplicit(self):
         if self.__isExplicit == True:

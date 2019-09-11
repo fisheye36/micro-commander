@@ -7,8 +7,12 @@ class InsertService:
         self.__explicit = settings['analysersettings']['explicit']
         self.__finalList = []
 
+    def _appendCapitalIfNeeded(self):
+        if len(self.__finalList) > 0 and self.__analyserSettings.getShiftStateAndClear():
+            self.__finalList[-1] = self.__finalList[-1].capitalize()
+            
     def _appendSpaceIfNeeded(self):
-        if self.__analyserSettings.getAutoSpace():
+        if self.__analyserSettings.getAutoSpace() and not self.__analyserSettings.checkExplicit():
             self.__finalList.append(' ')
 
     def _deleteSpacesIfNeeded(self):
@@ -21,7 +25,6 @@ class InsertService:
 
     def _processWordAsExplicit(self, word):
         self.__finalList.append(word)
-        self._appendSpaceIfNeeded()
     
     def _processWord(self, word):
         if word == self.__explicit:
@@ -31,7 +34,7 @@ class InsertService:
                 self.__finalList.append(settings['keyboard_mapping'][word])
             else:
                 self.__finalList.append(word)
-            self._appendSpaceIfNeeded()
+            
 
     def process(self, text):
         for word in text.split():
@@ -39,6 +42,9 @@ class InsertService:
                 self._processWordAsExplicit(word)
             else:
                 self._processWord(word)
+            self._appendCapitalIfNeeded()
+            self._appendSpaceIfNeeded()
+            
         self._deleteSpacesIfNeeded()
 
         return self.__finalList
