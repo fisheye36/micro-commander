@@ -1,18 +1,29 @@
 from conf import settings
 import logger
+from analyser.capitalletters import CapitalLetters
 
 class InsertService:
     def __init__(self, analyserSettings):
         self.__analyserSettings = analyserSettings
         self.__explicit = settings['analysersettings']['explicit']
+        self.__switchShift = settings['analysersettings']['switchShift']
         self.__finalList = []
 
     def _appendCapitalIfNeeded(self):
-        if len(self.__finalList) > 0 and self.__analyserSettings.getShiftStateAndClear():
+        if self.__analyserSettings.getCapitalLettersState() == CapitalLetters.OFF:
+            self.__finalList[-1] = self.__finalList[-1].lower()
+        elif self.__analyserSettings.getCapitalLettersState() == CapitalLetters.AUTO:
+            if self.__finalList[-1] == '.':
+                self.__analyserSettings.setShift()
+                return
+        else:
+            self.__finalList[-1] = self.__finalList[-1].upper()
+
+        if self.__finalList[-1] != ' ' and self.__analyserSettings.getShiftStateAndClear():
             self.__finalList[-1] = self.__finalList[-1].capitalize()
-            
+
     def _appendSpaceIfNeeded(self):
-        if self.__analyserSettings.getAutoSpace() and not self.__analyserSettings.checkExplicit():
+        if self.__analyserSettings.getAutoSpace():
             self.__finalList.append(' ')
 
     def _deleteSpacesIfNeeded(self):
@@ -29,6 +40,8 @@ class InsertService:
     def _processWord(self, word):
         if word == self.__explicit:
             self.__analyserSettings.setExplicit()
+        elif word == self.__switchShift:
+            self.__analyserSettings.setShift()
         else:
             if word in settings['keyboard_mapping'].keys():
                 self.__finalList.append(settings['keyboard_mapping'][word])
@@ -42,8 +55,10 @@ class InsertService:
                 self._processWordAsExplicit(word)
             else:
                 self._processWord(word)
-            self._appendCapitalIfNeeded()
-            self._appendSpaceIfNeeded()
+
+            if len(self.__finalList) > 0 and not self.__analyserSettings.checkExplicit() and word != self.__switchShift:
+                self._appendCapitalIfNeeded()
+                self._appendSpaceIfNeeded()
             
         self._deleteSpacesIfNeeded()
 

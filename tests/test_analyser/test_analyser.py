@@ -33,6 +33,7 @@ def test_shoud_correctly_set_service():
 def test_lalalalala1():
     text = "dosłownie cudzysłów cudzysłów"
     sut = Analyser()
+    sut.analyse("ustawienia capital off")
     assert ['cudzysłów', ' ', '\"'] == sut.analyse(text)
 
 @override_settings(data, only_active=False)
@@ -83,18 +84,23 @@ def test_lalalalala5():
     assert [(Key.alt, Key.f4)] == sut.analyse("komenda zamknij")
 
 @override_settings(data, only_active=False)
-def test_lalalalala6():
-    sut = Analyser()
-    assert [':', 'wq', Key.enter] == sut.analyse("komenda vim zapisz i zamknij")
-    sut.analyse("ustawienia auto Space")
-    assert [':', 'wq', Key.enter] == sut.analyse("komenda vim spacja zapisz spacja i spacja zamknij")
-
-@override_settings(data, only_active=False)
 def test_lalalala7():
     sut = Analyser()
-    assert ['Dzień', ' ', 'dobry', ',', ' ', 'nazywam', ' ', 'się', ' ', 'Czesio', '.', ' ', 'lubię',  ' ', 'jedzonko'] == sut.analyse("Dzień dobry przecinek nazywam się Czesio kropka lubię jedzonko")
+    sut.analyse('ustawienia capital off')
+    assert 'dzień dobry, nazywam się czesio. lubię jeść muchy' == ''.join(sut.analyse("Dzień dobry przecinek nazywam się Czesio kropka lubię jeść muchy"))
 
+@override_settings(data, only_active=False)
+def test_shouldUseAutoCapitalLettersAfterDots():
+    sut = Analyser()
+    sut.analyse('ustawienia capital Auto')
+    assert 'Dzień dobry, nazywam się Czesio. Lubię jeść muchy... Troche to dziwne.' == ''.join(sut.analyse("duża dzień dobry przecinek nazywam się Czesio kropka lubię jeść muchy kropka kropka kropka troche to dziwne kropka"))
 
+@override_settings(data, only_active=False)
+def test_shoundUseCapitalLetters():
+    sut = Analyser()
+    sut.analyse('ustawienia auto space')
+    sut.analyse('ustawienia capital on')
+    assert 'DZIEŃ DOBRY, NAZYWAM SIĘ CZESIO. CHCIAŁEM SPRAWDZIĆ JESZCZE, CZY DZIAŁA "CAPSLOCK" CUDZYSŁÓW.' == ''.join(sut.analyse("dzień spacja dobry przecinek spacja nazywam spacja się spacja Czesio kropka spacja chciałem spacja sprawdzić spacja jeszcze przecinek spacja czy spacja działa spacja cudzysłów capslock cudzysłów spacja dosłownie cudzysłów kropka"))
 
 
 

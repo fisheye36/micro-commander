@@ -56,9 +56,13 @@ data = {
     'analysersettings': {
         'autospace': 'auto space',
         'explicit': 'dosłownie',
+        'switchShift': 'duża',
         'deleteAll': 'wszystko',
         'micOn': 'włącz',
-        'micOff': 'wyłącz'
+        'micOff': 'wyłącz',
+        'capitalOn': 'capital on',
+        'capitalAuto': 'capital auto',
+        'capitalOff': 'capital off'
     },
     'servicemapping': {
         'komenda': 'CommandService',
