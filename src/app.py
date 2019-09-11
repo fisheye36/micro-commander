@@ -15,10 +15,15 @@ class Application:
     def __init__(self):
         self.window_manager = WindowManager()
         self.audio_manager = AudioManager()
+        self.state = {
+            'muted': False,
+            'connectivity': False
+        }
 
     def start(self):
         settings.load_configuration()
-        self.window_manager.subscribe(settings)
+        settings.set_window_manager(self.window_manager)
+
         self.window_manager.start()
         self.audio_manager.start()
 

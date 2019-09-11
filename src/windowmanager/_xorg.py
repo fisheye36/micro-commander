@@ -1,3 +1,5 @@
+from time import sleep
+
 import Xlib
 from Xlib.display import Display
 
@@ -27,7 +29,7 @@ class WindowManager(AbstractWindowManager):
         self._active_window = None
         self._update_active_window()
 
-    def run(self):
+    def main(self):
         self.notify_all()
         while True:  # next_event() sleeps until we get an event
             self._handle_xevent(self.disp.next_event())

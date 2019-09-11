@@ -4,7 +4,7 @@ import time
 
 import logger
 from analyser import Analyser
-from key_input.input_simulator import FakeKeyboard
+from input_simulator import FakeKeyboard
 from speech.converter import AudioConverter
 
 
