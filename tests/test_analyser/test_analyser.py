@@ -61,7 +61,7 @@ def test_lalalalala2():
 @override_settings(data, only_active=False)
 def test_lalalalalala2():
     sut = Analyser()
-    sut.analyse("komenda auto Space")
+    sut.analyse("ustawienia auto Space")
     result = sut.analyse("alias spacja to do równe cudzysłów vim spacja tylda kropka ukośnik to do cudzysłów")
     assert 'alias todo=\"vim ~./todo\"' == "".join(result)
     
@@ -69,7 +69,7 @@ def test_lalalalalala2():
 @override_settings(data, only_active=False)
 def test_lalalalala3():
     sut = Analyser()
-    text = "komenda auto Space"
+    text = "ustawienia auto Space"
     assert ["Ala"," ", "ma"," ", "kota"] == sut.analyse("Ala ma kota")
     sut.analyse(text)
     assert ["Ala", "ma", "kota"] == sut.analyse("Ala ma kota")
@@ -79,16 +79,20 @@ def test_lalalalala3():
 @override_settings(data, only_active=False)
 def test_lalalalala5():
     sut = Analyser()
-    sut.analyse("komenda auto Space")
+    sut.analyse("ustawienia auto Space")
     assert [(Key.alt, Key.f4)] == sut.analyse("komenda zamknij")
 
 @override_settings(data, only_active=False)
 def test_lalalalala6():
     sut = Analyser()
     assert [':', 'wq', Key.enter] == sut.analyse("komenda vim zapisz i zamknij")
-    sut.analyse("komenda auto Space")
+    sut.analyse("ustawienia auto Space")
     assert [':', 'wq', Key.enter] == sut.analyse("komenda vim spacja zapisz spacja i spacja zamknij")
 
+@override_settings(data, only_active=False)
+def test_lalalala7():
+    sut = Analyser()
+    assert ['Dzień', ' ', 'dobry', ',', ' ', 'nazywam', ' ', 'się', ' ', 'Czesio', '.', ' ', 'lubię',  ' ', 'jedzonko'] == sut.analyse("Dzień dobry przecinek nazywam się Czesio kropka lubię jedzonko")
 
 
 

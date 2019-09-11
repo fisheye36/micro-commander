@@ -11,9 +11,13 @@ class InsertService:
         if self.__analyserSettings.getAutoSpace():
             self.__finalList.append(' ')
 
-    def _deleteSpaceIfNeeded(self):
+    def _deleteSpacesIfNeeded(self):
         if self.__analyserSettings.getAutoSpace() and len(self.__finalList) > 0:
             del self.__finalList[-1]
+
+        for i, word in enumerate(self.__finalList):
+            if self.__analyserSettings.getAutoSpace() and i > 0 and (word == '.' or word == ','):
+                del self.__finalList[i - 1]
 
     def _processWordAsExplicit(self, word):
         self.__finalList.append(word)
@@ -35,7 +39,8 @@ class InsertService:
                 self._processWordAsExplicit(word)
             else:
                 self._processWord(word)
-        self._deleteSpaceIfNeeded()
+        self._deleteSpacesIfNeeded()
+
         return self.__finalList
 
 if __name__ == "__main__":
