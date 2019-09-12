@@ -60,9 +60,9 @@ data = {
         'deleteAll': 'wszystko',
         'micOn': 'włącz',
         'micOff': 'wyłącz',
-        'capitalOn': 'capital on',
+        'capitalOn': 'capital włącz',
         'capitalAuto': 'capital auto',
-        'capitalOff': 'capital off'
+        'capitalOff': 'capital wyłącz'
     },
     'servicemapping': {
         'komenda': 'CommandService',
@@ -102,7 +102,7 @@ data = {
             'znajdź': [(Key.ctrl, 'f')],
             'historia': [(Key.ctrl, 'h')],
             'pobrane': [(Key.ctrl, 'j')],
-            'nowe-okno': [(Key.ctrl, 'd')],
+            'nowe okno': [(Key.ctrl, 'd')],
             'konsola': [Key.f12],
             'enter': [Key.enter],
             'incognito': [(Key.ctrl, Key.shift, 'n')],
