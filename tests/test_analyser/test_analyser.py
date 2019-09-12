@@ -33,6 +33,7 @@ def test_shoud_correctly_set_service():
 def test_lalalalala1():
     text = "dosłownie cudzysłów cudzysłów"
     sut = Analyser()
+    sut.analyse("ustawienia capital off")
     assert ['cudzysłów', ' ', '\"'] == sut.analyse(text)
 
 @override_settings(data, only_active=False)
@@ -61,7 +62,7 @@ def test_lalalalala2():
 @override_settings(data, only_active=False)
 def test_lalalalalala2():
     sut = Analyser()
-    sut.analyse("komenda auto Space")
+    sut.analyse("ustawienia auto Space")
     result = sut.analyse("alias spacja to do równe cudzysłów vim spacja tylda kropka ukośnik to do cudzysłów")
     assert 'alias todo=\"vim ~./todo\"' == "".join(result)
     
@@ -69,7 +70,7 @@ def test_lalalalalala2():
 @override_settings(data, only_active=False)
 def test_lalalalala3():
     sut = Analyser()
-    text = "komenda auto Space"
+    text = "ustawienia auto Space"
     assert ["Ala"," ", "ma"," ", "kota"] == sut.analyse("Ala ma kota")
     sut.analyse(text)
     assert ["Ala", "ma", "kota"] == sut.analyse("Ala ma kota")
@@ -79,18 +80,27 @@ def test_lalalalala3():
 @override_settings(data, only_active=False)
 def test_lalalalala5():
     sut = Analyser()
-    sut.analyse("komenda auto Space")
+    sut.analyse("ustawienia auto Space")
     assert [(Key.alt, Key.f4)] == sut.analyse("komenda zamknij")
 
 @override_settings(data, only_active=False)
-def test_lalalalala6():
+def test_lalalala7():
     sut = Analyser()
-    assert [':', 'wq', Key.enter] == sut.analyse("komenda vim zapisz i zamknij")
-    sut.analyse("komenda auto Space")
-    assert [':', 'wq', Key.enter] == sut.analyse("komenda vim spacja zapisz spacja i spacja zamknij")
+    sut.analyse('ustawienia capital off')
+    assert 'dzień dobry, nazywam się czesio. lubię jeść muchy' == ''.join(sut.analyse("Dzień dobry przecinek nazywam się Czesio kropka lubię jeść muchy"))
 
+@override_settings(data, only_active=False)
+def test_shouldUseAutoCapitalLettersAfterDots():
+    sut = Analyser()
+    sut.analyse('ustawienia capital Auto')
+    assert 'Dzień dobry, nazywam się Czesio. Lubię jeść muchy... Troche to dziwne.' == ''.join(sut.analyse("duża dzień dobry przecinek nazywam się Czesio kropka lubię jeść muchy kropka kropka kropka troche to dziwne kropka"))
 
-
+@override_settings(data, only_active=False)
+def test_shoundUseCapitalLetters():
+    sut = Analyser()
+    sut.analyse('ustawienia auto space')
+    sut.analyse('ustawienia capital on')
+    assert 'DZIEŃ DOBRY, NAZYWAM SIĘ CZESIO. CHCIAŁEM SPRAWDZIĆ JESZCZE, CZY DZIAŁA "CAPSLOCK" CUDZYSŁÓW.' == ''.join(sut.analyse("dzień spacja dobry przecinek spacja nazywam spacja się spacja Czesio kropka spacja chciałem spacja sprawdzić spacja jeszcze przecinek spacja czy spacja działa spacja cudzysłów capslock cudzysłów spacja dosłownie cudzysłów kropka"))
 
 
 
