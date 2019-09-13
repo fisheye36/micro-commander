@@ -72,7 +72,8 @@ data = {
     },
     'execute': {
         'edytor kodu': ['/snap/bin/code'],
-        'przeglądarka': ['chromium-browser', 'facebook.com']
+        'przeglądarka': ['chromium-browser'],
+        'youtube' : ['chromium-browser', 'youtube.com']
     },
     'general': {
         'language': 'pl',
