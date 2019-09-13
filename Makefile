@@ -15,6 +15,8 @@ help:
 	@echo "	   clean sphinx documentation"
 	@echo "make install"
 	@echo "	   create virtualenv and install requirements"
+	@echo "make exec"
+	@echo "	   creates executable file to ./dist/app"
 	@echo "make ipython"
 	@echo "	   run ipython inside virtualenv"
 	@echo "make clean"
@@ -22,6 +24,10 @@ help:
 
 run: ensure-venv
 	@${PYTHON} src/app.py
+
+exec: ensure-venv
+	${VENV_NAME}/bin/pip install pyinstaller
+	pyinstaller app.spec
 
 ensure-venv:
 	@test -d ${VENV_NAME} || (echo "virtualenv not found. '${VENV_NAME}' doesn't exists"; exit 1)
