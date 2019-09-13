@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import QApplication, QMessageBox, QSystemTrayIcon
 from conf import settings
 from gui.tray import TrayWindow
 from gui.main_window import MainWindow
-from speech.converter_thread import AudioManager
+from logic.logic import Logic
 from windowmanager import WindowManager
 
 
@@ -14,18 +14,18 @@ class Application:
 
     def __init__(self):
         self.window_manager = WindowManager()
-        self.audio_manager = AudioManager()
         self.state = {
             'muted': False,
             'connectivity': False
         }
+        self.logic = Logic(self.state)
 
     def start(self):
         settings.load_configuration()
         settings.set_window_manager(self.window_manager)
 
         self.window_manager.start()
-        self.audio_manager.start()
+        self.logic.start()
 
         app = QApplication(sys.argv)
         main_window = MainWindow()

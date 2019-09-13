@@ -8,13 +8,13 @@ from input_simulator import FakeKeyboard
 from speech.converter import AudioConverter
 
 
-class AudioManager(threading.Thread):
+class Logic(threading.Thread):
 
-    def __init__(self):
+    def __init__(self, state):
         super().__init__()
         self.daemon = True
         self.audio_converter = None
-        self.analyser = Analyser()
+        self.analyser = Analyser(state)
         self.fake_keyboard = FakeKeyboard()
         self.responses = None
         
@@ -37,7 +37,7 @@ class AudioManager(threading.Thread):
 
             response_sentence = self.audio_converter.get_response()
             self.responses.extend(response_sentence)
-            
+
             analyzed_keys = self.analyser.analyse(' '.join(self.responses))
             self.fake_keyboard.simulate(analyzed_keys)
             self.responses.clear()
