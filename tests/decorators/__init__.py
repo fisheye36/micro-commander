@@ -11,6 +11,7 @@ def override_settings(new_settings, only_active=True):
     if only_active:
         new_settings = {
             'app_mapping': {},
+            'common': {},
             'default': new_settings
         }
 

@@ -1,3 +1,4 @@
+from analyser.capitalletters import CapitalLetters
 import logger
 
 class AnalyserSettings:
@@ -5,9 +6,29 @@ class AnalyserSettings:
         self.__isExplicit = False
         self.__autoSpace = True
         self.__isMicOn = True
-    
+        self.__shift = False
+        self.__capitalLetters = CapitalLetters.AUTO
+
+    def setShift(self):
+        self.__shift = True
+
+    def setCapitalLettersState(self, state):
+        print("Capital letters set to: ", state)
+        self.__capitalLetters = state
+
+    def getCapitalLettersState(self):
+        return self.__capitalLetters
+
+    def getShiftStateAndClear(self):
+        val = self.__shift
+        self.__shift = False
+        return val
+
     def setExplicit(self):
         self.__isExplicit = True
+
+    def checkExplicit(self):
+        return self.__isExplicit
 
     def getExplicit(self):
         if self.__isExplicit == True:

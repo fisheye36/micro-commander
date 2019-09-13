@@ -24,14 +24,14 @@ data = {
         'przecinek': ',',
         'ukośnik': '/',
         'apostrof': '\'',
-        'lewy nawias': '(',
-        'prawy nawias': ')',
-        'lewy nawias kwadratowy': '[',
-        'prawy nawias kwadratowy': ']',
-        'lewy nawias klamrowy': '{',
-        'prawy nawias klamrowy': '}',
-        'mniej niż': '<',
-        'więcej niż': '>',
+        'lewy nawias zwykły' : '(',
+        'prawy nawias zwykły' : ')',
+        'lewy nawias kwadratowy' : '[',
+        'prawy nawias kwadratowy' : ']',
+        'lewy nawias klamrowy' : '{',
+        'prawy nawias klamrowy' : '}',
+        'mniej niż' : '<',
+        'więcej niż' : '>',
         'jeden': '1',
         '2': 'dwa',
         '3': 'trzy',
@@ -56,9 +56,13 @@ data = {
     'analysersettings': {
         'autospace': 'auto space',
         'explicit': 'dosłownie',
+        'switchShift': 'duża',
         'deleteAll': 'wszystko',
         'micOn': 'włącz',
-        'micOff': 'wyłącz'
+        'micOff': 'wyłącz',
+        'capitalOn': 'capital on',
+        'capitalAuto': 'capital auto',
+        'capitalOff': 'capital off'
     },
     'servicemapping': {
         'komenda': 'CommandService',
@@ -79,14 +83,16 @@ data = {
         'chromium-browser': 'browser',
         'gnome-terminal': 'terminal'
     },
-    'default': {
+    'common': {
         'commands': {
             'zamknij': [(Key.alt, Key.f4)]
         }
     },
+    'default': {
+        'commands': {}
+    },
     'browser': {
         'commands': {
-            'zamknij': [(Key.alt, Key.f4)],
             'nowa karta': [(Key.ctrl, 't')],
             'zamknij kartę': [(Key.ctrl, 'w')],
             'cofnij': [Key.backspace],

@@ -1,3 +1,4 @@
+import copy
 import pickle
 from collections import UserDict
 from pathlib import Path
@@ -49,7 +50,10 @@ class Settings(UserDict):
             logger.info("Configuration successfully updated.")
 
     def active(self):
-        return self.data[self._active_mode]
+        merged_config = copy.deepcopy(self.data.get('common', {}))
+        active_config = self.data[self._active_mode]
+        merged_config.update(active_config)
+        return merged_config
 
     def notify(self, program_name):
         self.active_mode = program_name
