@@ -1,0 +1,5 @@
+# Audio recording parameters
+STREAMING_LIMIT = 10000
+SAMPLE_RATE = 16000
+CHUNK_SIZE = int(SAMPLE_RATE / 10)  # 100ms
+LANGUAGE_CODE = 'pl-PL'
