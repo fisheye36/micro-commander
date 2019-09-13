@@ -30,8 +30,8 @@ data = {
         'prawy nawias kwadratowy' : ']',
         'lewy nawias klamrowy' : '{',
         'prawy nawias klamrowy' : '}',
-        'mniej niż' : '<',
-        'więcej niż' : '>',
+        'mniej' : '<',
+        'więcej' : '>',
         'jeden': '1',
         '2': 'dwa',
         '3': 'trzy',
@@ -60,9 +60,9 @@ data = {
         'deleteAll': 'wszystko',
         'micOn': 'włącz',
         'micOff': 'wyłącz',
-        'capitalOn': 'capital on',
+        'capitalOn': 'capital włącz',
         'capitalAuto': 'capital auto',
-        'capitalOff': 'capital off'
+        'capitalOff': 'capital wyłącz'
     },
     'servicemapping': {
         'komenda': 'CommandService',
@@ -71,8 +71,9 @@ data = {
         'ustawienia': 'SettingsService'
     },
     'execute': {
-        'edytor kodu': '/snap/bin/code',
-        'przeglądarka': 'chromium-browser'
+        'edytor kodu': ['/snap/bin/code'],
+        'przeglądarka': ['chromium-browser'],
+        'youtube' : ['chromium-browser', 'youtube.com']
     },
     'general': {
         'language': 'pl',
@@ -81,11 +82,15 @@ data = {
         'plasmashell': 'desktop',
         'konsole': 'terminal',
         'chromium-browser': 'browser',
-        'gnome-terminal': 'terminal'
+        'gnome-terminal': 'terminal',
+        'libreoffice-writer' : 'word'
     },
     'common': {
         'commands': {
-            'zamknij': [(Key.alt, Key.f4)]
+            'zamknij': [(Key.alt, Key.f4)],
+            'terminal': [(Key.ctrl, Key.alt, 't')],
+            'pulpit': [(Key.ctrl, Key.alt, 'd')],
+            'wyloguj': [(Key.ctrl, Key.alt, Key.delete)],
         }
     },
     'default': {
@@ -102,10 +107,10 @@ data = {
             'znajdź': [(Key.ctrl, 'f')],
             'historia': [(Key.ctrl, 'h')],
             'pobrane': [(Key.ctrl, 'j')],
-            'nowe-okno': [(Key.ctrl, 'd')],
+            'nowe okno': [(Key.ctrl, 'd')],
             'konsola': [Key.f12],
             'enter': [Key.enter],
-            'incognito': [(Key.ctrl, Key.shift, 'n')],
+            'incognito': [(Key.ctrl, Key.shift, 'n')]
         }
     },
     'terminal': {
@@ -116,9 +121,30 @@ data = {
             'vim insert': ['i', Key.enter],
             'vim cofnij': ['u'],
             'vim tryb normalny': [Key.esc],
+            'zatrzymaj': [(Key.ctrl, 'c')],
+            'wyloguj': [(Key.ctrl, 'd')],
+            'wyczyść': [(Key.ctrl, 'l')],
+            'szukaj w historii': [(Key.ctrl, 'r')]
         }
     },
     'desktop': {
         'commands': []
-    }
+    },
+    'word': {
+        'commands': {
+            'zapisz': [(Key.ctrl, 's')],
+            'otwórz': [(Key.ctrl, 'o')],
+            'kopiuj': [(Key.ctrl, 'c')],
+            'nowy': [(Key.ctrl, 'n')],
+            'wyjdź': [(Key.alt, Key.f4)],
+            'wytnij': [(Key.ctrl, 'x')],
+            'wklej': [(Key.ctrl, 'v')],
+            'drukuj': [(Key.ctrl, 'p')],
+            'pogrub': [(Key.ctrl, 'b')],
+            'kursywa': [(Key.ctrl, 'i')],
+            'podkreśl': [(Key.ctrl, 'u')],
+            'cofnij': [(Key.ctrl, 'z')],
+            'zaznacz': [(Key.ctrl, 'a')]
+        }
+    },
 }

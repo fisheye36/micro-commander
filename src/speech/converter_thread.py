@@ -39,7 +39,6 @@ class AudioManager(threading.Thread):
             self.responses.extend(response_sentence)
             
             analyzed_keys = self.analyser.analyse(' '.join(self.responses))
-            print(analyzed_keys)
             self.fake_keyboard.simulate(analyzed_keys)
             self.responses.clear()
 

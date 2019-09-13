@@ -19,6 +19,9 @@ class AnalyserSettings:
     def getCapitalLettersState(self):
         return self.__capitalLetters
 
+    def checkShift(self):
+        return self.__shift
+
     def getShiftStateAndClear(self):
         val = self.__shift
         self.__shift = False
