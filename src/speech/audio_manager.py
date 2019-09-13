@@ -1,5 +1,4 @@
 import os
-import re
 import threading
 
 from google.cloud import speech_v1p1beta1 as speech
@@ -70,10 +69,10 @@ class AudioManager(threading.Thread):
             # line, so subsequent lines will overwrite them.
 
             if result.is_final:
-                self.distributor.final(transcript, corrected_time)
                 stream.is_final_end_time = stream.result_end_time
                 stream.last_transcript_was_final = True
             else:
+                self.transc = transcript
                 self.distributor.interim(transcript, corrected_time)
                 stream.last_transcript_was_final = False
 
@@ -104,5 +103,6 @@ class AudioManager(threading.Thread):
                 stream.restart_counter = stream.restart_counter + 1
 
                 if not stream.last_transcript_was_final:
-                    logger.info('\n')
+                    self.distributor.final(self.transc)
+                    logger.debug('last_transcript_was_final\n')
                 stream.new_stream = True

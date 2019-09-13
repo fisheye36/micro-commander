@@ -10,7 +10,7 @@ class Distributor:
         logger.debug("[{}] INTERIM: {}".format(corrected_time, transcript))
 
 
-    def final(self, transcript, corrected_time):
-        logger.info("[{}] FINAL: {}".format(corrected_time, transcript))
+    def final(self, transcript):
+        logger.info("FINAL: {}".format(transcript))
         analyzed_keys = self.analyser.analyse(transcript)
         self.keyboard.simulate(analyzed_keys)

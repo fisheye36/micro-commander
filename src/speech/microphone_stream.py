@@ -38,12 +38,10 @@ class ResumableMicrophoneStream:
         )
 
     def __enter__(self):
-
         self.closed = False
         return self
 
     def __exit__(self, type, value, traceback):
-
         self._audio_stream.stop_stream()
         self._audio_stream.close()
         self.closed = True
