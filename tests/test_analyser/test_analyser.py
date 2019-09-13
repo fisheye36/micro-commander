@@ -86,7 +86,7 @@ def test_lalalalala5():
 @override_settings(data, only_active=False)
 def test_lalalala7():
     sut = Analyser()
-    sut.analyse('ustawienia capital off')
+    sut.analyse('ustawienia capital wyłącz')
     assert 'dzień dobry, nazywam się czesio. lubię jeść muchy' == ''.join(sut.analyse("Dzień dobry przecinek nazywam się Czesio kropka lubię jeść muchy"))
 
 @override_settings(data, only_active=False)
@@ -99,8 +99,25 @@ def test_shouldUseAutoCapitalLettersAfterDots():
 def test_shoundUseCapitalLetters():
     sut = Analyser()
     sut.analyse('ustawienia auto space')
-    sut.analyse('ustawienia capital on')
+    sut.analyse('ustawienia capital włącz')
     assert 'DZIEŃ DOBRY, NAZYWAM SIĘ CZESIO. CHCIAŁEM SPRAWDZIĆ JESZCZE, CZY DZIAŁA "CAPSLOCK" CUDZYSŁÓW.' == ''.join(sut.analyse("dzień spacja dobry przecinek spacja nazywam spacja się spacja Czesio kropka spacja chciałem spacja sprawdzić spacja jeszcze przecinek spacja czy spacja działa spacja cudzysłów capslock cudzysłów spacja dosłownie cudzysłów kropka"))
+
+
+@override_settings(data, only_active=False)
+def test_shoundUseCapitalLettersfdsafdasfdasfdfsfdsfsdasfdsa():
+    sut = Analyser()
+    assert 'duża' == ''.join(sut.analyse("dosłownie duża"))
+
+
+
+@override_settings(data, only_active=False)
+def test_shoundUseCapitalLettersfdsafdasfdasfdasfdsa():
+    sut = Analyser()
+    assert 'Duża' == ''.join(sut.analyse("duża dosłownie duża"))
+
+
+
+
 
 
 

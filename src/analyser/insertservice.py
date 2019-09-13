@@ -27,7 +27,7 @@ class InsertService:
             self.__finalList.append(' ')
 
     def _deleteSpacesIfNeeded(self):
-        if self.__analyserSettings.getAutoSpace() and len(self.__finalList) > 0:
+        if self.__analyserSettings.getAutoSpace() and len(self.__finalList) > 0 and self.__finalList[-1] == ' ':
             del self.__finalList[-1]
 
         for i, word in enumerate(self.__finalList):
@@ -35,6 +35,8 @@ class InsertService:
                 del self.__finalList[i - 1]
 
     def _processWordAsExplicit(self, word):
+        if self.__analyserSettings.checkShift():
+            word = word.capitalize()
         self.__finalList.append(word)
     
     def _processWord(self, word):
@@ -55,7 +57,6 @@ class InsertService:
                 self._processWordAsExplicit(word)
             else:
                 self._processWord(word)
-
             if len(self.__finalList) > 0 and not self.__analyserSettings.checkExplicit() and word != self.__switchShift:
                 self._appendCapitalIfNeeded()
                 self._appendSpaceIfNeeded()

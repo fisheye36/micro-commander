@@ -11,16 +11,17 @@ class ExecutionService(InsertService):
         self.__finalList = []
 
     def _execute(self, words):
-        words = [word for word in words if word != ' ']
+        words = [word.lower() for word in words if word != ' ']
 
         dic = settings['execute']
         for key in dic:
-            if set(key.split()) <= set(words):
+            if Helper.sublist(key.split(), words):
                 lenOfKeyElements = len(key.split())
                 del words[:lenOfKeyElements]
                 try:
-                    words.insert(0, dic[key])
-                    subprocess.run(words)
+                    toExecute = dic[key] + [''.join(words)]
+                    logger.info('Executing: {}'.format(' '.join(toExecute)))
+                    subprocess.run(toExecute)
                 except:
                     logger.info('Something went wrong when trying to execute command')
 
