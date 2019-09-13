@@ -6,7 +6,7 @@ import importlib
 import logger
 
 class Analyser:
-    def __init__(self, state):
+    def __init__(self, state = {'muted': False, 'connectivity': False}):
         self.finalList = []
         self.__analyserSettings = AnalyserSettings(state)
 
