@@ -51,8 +51,12 @@ class Settings(UserDict):
 
     def active(self):
         merged_config = copy.deepcopy(self.data.get('common', {}))
-        active_config = self.data[self._active_mode]
-        merged_config.update(active_config)
+        for key, value in self.data[self._active_mode].items():
+            if key in merged_config.keys():
+                for k, v in merged_config[key].items():
+                    merged_config[key][k] = v
+            else:
+                merged_config[key] = value
         return merged_config
 
     def notify(self, program_name):
