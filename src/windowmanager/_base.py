@@ -12,7 +12,7 @@ class AbstractWindowManager(threading.Thread, ABC):
         for observer in self._observers:
             observer.notify(self.get_active_program_name().lower())
 
-    def subscribe(self, obj):
+    def register(self, obj):
         self._observers.append(obj)
 
     @abstractmethod

@@ -61,7 +61,10 @@ class Settings(UserDict):
 
     def notify(self, program_name):
         self.active_mode = program_name
-
+    
+    def set_window_manager(self, window_manager):
+        window_manager.register(self)
+        
     @property
     def active_mode(self):
         return self._active_mode

@@ -6,9 +6,9 @@ import importlib
 import logger
 
 class Analyser:
-    def __init__(self):
+    def __init__(self, state = {'muted': False, 'connectivity': False}):
         self.finalList = []
-        self.__analyserSettings = AnalyserSettings()
+        self.__analyserSettings = AnalyserSettings(state)
 
     def _setService(self, text):
         wordList = text.split()

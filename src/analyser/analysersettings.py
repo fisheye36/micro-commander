@@ -2,12 +2,13 @@ from analyser.capitalletters import CapitalLetters
 import logger
 
 class AnalyserSettings:
-    def __init__(self):
+    def __init__(self, state):
         self.__isExplicit = False
         self.__autoSpace = True
         self.__isMicOn = True
         self.__shift = False
         self.__capitalLetters = CapitalLetters.AUTO
+        self.__stateRef = state
 
     def setShift(self):
         self.__shift = True
@@ -51,10 +52,12 @@ class AnalyserSettings:
     
     def turnOnMic(self):
         logger.info('Microphone - ON')
+        self.__stateRef['muted'] = False
         self.__isMicOn = True
 
     def turnOffMic(self):
         logger.info('Microphone - OFF')
+        self.__stateRef['muted'] = True
         self.__isMicOn = False
     
     def getMicState(self):
