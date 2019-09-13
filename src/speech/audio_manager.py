@@ -65,14 +65,12 @@ class AudioManager(threading.Thread):
 
             corrected_time = (stream.result_end_time - stream.bridging_offset
                               + (STREAMING_LIMIT * stream.restart_counter))
-            # Display interim results, but with a carriage return at the end of the
-            # line, so subsequent lines will overwrite them.
 
             if result.is_final:
                 stream.is_final_end_time = stream.result_end_time
+                self.distributor.final(transcript)
                 stream.last_transcript_was_final = True
             else:
-                self.transc = transcript
                 self.distributor.interim(transcript, corrected_time)
                 stream.last_transcript_was_final = False
 
@@ -103,6 +101,5 @@ class AudioManager(threading.Thread):
                 stream.restart_counter = stream.restart_counter + 1
 
                 if not stream.last_transcript_was_final:
-                    self.distributor.final(self.transc)
                     logger.debug('last_transcript_was_final\n')
                 stream.new_stream = True
