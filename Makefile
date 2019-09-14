@@ -34,8 +34,10 @@ ensure-venv:
 
 install:
 	@echo "Installing dependencies:"
-	@${SYSTEM_PYTHON} -m pip >/dev/null 2>&1 || (curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && ${SYSTEM_PYTHON} get-pip-py)
-	@apt-get install portaudio19-dev
+	apt-get update
+	apt-get install -y curl portaudio19-dev python3.5-dev
+	@${SYSTEM_PYTHON} -m pip >/dev/null 2>&1 || (curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && ${SYSTEM_PYTHON} get-pip.py)
+	@${SYSTEM_PYTHON} -m virtualenv >/dev/null 2>&1 || ${SYSTEM_PYTHON} -m pip install virtualenv
 	@make install-no-deps
 
 install-no-deps:
