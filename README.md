@@ -17,3 +17,12 @@ Run `make install` or
 ## Hints
 - run `make help`
 - In case of `PyAudio` collecting issue, your device probably does not have the `portaudio` library. Please consider installig the module by typing `sudo apt-get install libasound-dev` or building it manually.
+
+## Authors
+
+* **Adrian Wysocki** - [theratty](https://github.com/theratty)
+* **Michał Szczepańczyk** - [Shaid3r](https://github.com/Shaid3r)
+* **Jakub Wojtyczko** - [JakubWojtyczko](https://github.com/JakubWojtyczko)
+* **Kamil Warchoł** - [fisheye36](https://github.com/fisheye36)
+* **Kamil Tomczyk** - [KamTomczyk](https://github.com/KamTomczyk)
+* **Karol Cedro** - [Emu-Emax](https://github.com/Emu-Emax)
