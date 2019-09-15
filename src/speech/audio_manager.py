@@ -10,11 +10,11 @@ from speech.converter import AudioConverter
 
 class AudioManager(threading.Thread):
 
-    def __init__(self):
+    def __init__(self, state):
         super().__init__()
         self.daemon = True
         self.audio_converter = None
-        self.analyser = Analyser()
+        self.analyser = Analyser(state)
         self.fake_keyboard = FakeKeyboard()
         self.responses = None
         

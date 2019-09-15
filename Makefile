@@ -15,6 +15,8 @@ help:
 	@echo "	   clean sphinx documentation"
 	@echo "make install"
 	@echo "	   create virtualenv and install requirements"
+	@echo "make exec"
+	@echo "	   creates executable file to ./dist/app"
 	@echo "make ipython"
 	@echo "	   run ipython inside virtualenv"
 	@echo "make clean"
@@ -23,10 +25,22 @@ help:
 run: ensure-venv
 	@${PYTHON} src/app.py
 
+exec: ensure-venv
+	${VENV_NAME}/bin/pip install pyinstaller
+	${VENV_NAME}/bin/pyinstaller app.spec
+
 ensure-venv:
 	@test -d ${VENV_NAME} || (echo "virtualenv not found. '${VENV_NAME}' doesn't exists"; exit 1)
 
 install:
+	@echo "Installing dependencies:"
+	apt-get update
+	apt-get install -y curl portaudio19-dev python3.5-dev
+	@${SYSTEM_PYTHON} -m pip >/dev/null 2>&1 || (curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && ${SYSTEM_PYTHON} get-pip.py)
+	@${SYSTEM_PYTHON} -m virtualenv >/dev/null 2>&1 || ${SYSTEM_PYTHON} -m pip install virtualenv
+	@make install-no-deps
+
+install-no-deps:
 	@echo "Creating virtualenv: ${VENV_NAME}"
 	${SYSTEM_PYTHON} -m virtualenv ${VENV_NAME} || (echo "Creating virtualenv failed"; exit 1)
 	${VENV_NAME}/bin/pip install -r requirements.txt || (echo "Installing requirements.txt failed"; exit 1)

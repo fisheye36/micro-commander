@@ -27,5 +27,5 @@ if __name__ == "__main__":
 
     ob = DummyObserver()
     w = WindowManager()
-    w.subscribe(ob)
+    w.register(ob)
     w.start()

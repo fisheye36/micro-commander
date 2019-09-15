@@ -33,17 +33,16 @@ class TrayWindow(QDialog):
 
         self.trayIcon.activated.connect(self.iconActivated)
 
-        icon = QIcon(getResource("speech.png"))
+        icon = QIcon(getResource("speechOn.png"))
         self.trayIcon.setIcon(icon)
         self.setWindowIcon(icon)
 
-        self.trayIcon.setToolTip("Sample tooltip")
+        self.trayIcon.setToolTip("MicroCommander")
 
     def iconActivated(self, reason):
         self.showNotification("Micro commander", "Status: running")
 
     def showSettings(self):
-        self.showNotification("Ustawienia", "wlaczone")
         self.settingsWindow.show()
 
     @staticmethod
